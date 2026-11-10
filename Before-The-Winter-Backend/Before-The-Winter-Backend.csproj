@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Everything_Lost_Backend</RootNamespace>
+        <UserSecretsId>Everything-Lost-Backend-Telegram</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="..\Sources\Welcome_1080.png" Link="Sources\Welcome_1080.png" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Cloud.Firestore" Version="4.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7" />
+    </ItemGroup>
+
+</Project>
