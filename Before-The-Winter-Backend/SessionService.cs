@@ -31,6 +31,17 @@ internal sealed class SessionService(IConfiguration configuration, TimeProvider 
         }
     }
 
+    public string? GetActiveDeviceId(string userId)
+    {
+        lock (_gate)
+        {
+            return _currentByUser.TryGetValue(userId, out var current)
+                   && current.ExpiresAt > time.GetUtcNow()
+                ? current.DeviceId
+                : null;
+        }
+    }
+
     public bool IsValidSession(string sessionId, string userId)
     {
         lock (_gate)

@@ -83,7 +83,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapPost("/api/users/login", async (
     LoginRequest request, IServiceProvider services, IConfiguration configuration, SessionService sessions,
-    IWebHostEnvironment environment, CancellationToken ct) =>
+    IWebHostEnvironment environment, ILoggerFactory loggerFactory, CancellationToken ct) =>
 {
     if (RequireUser(request.UserId, services, out var firestore) is { } error) return error;
     if (string.IsNullOrWhiteSpace(request.DeviceId)) return Results.BadRequest(new { error = "deviceId is required." });
@@ -119,9 +119,19 @@ app.MapPost("/api/users/login", async (
     }
 
     var deviceId = request.DeviceId.Trim();
+    var deviceInfo = request.DeviceInfo?.Replace('\r', ' ').Replace('\n', ' ');
+    if (deviceInfo?.Length > 256) deviceInfo = deviceInfo[..256];
+    var loginLogger = loggerFactory.CreateLogger("DeviceLogin");
+    loginLogger.LogInformation("Login attempt: userId={UserId}, deviceId={DeviceId}, deviceInfo={DeviceInfo}",
+        userId, deviceId, deviceInfo);
     var activeElsewhere = Results.Json(
         new { error = "The account is active on another device." }, statusCode: StatusCodes.Status409Conflict);
-    if (sessions.IsActiveOnAnotherDevice(userId, deviceId)) return activeElsewhere;
+    if (sessions.IsActiveOnAnotherDevice(userId, deviceId))
+    {
+        loginLogger.LogWarning("Login conflict: userId={UserId}, incomingDeviceId={IncomingDeviceId}, activeDeviceId={ActiveDeviceId}",
+            userId, deviceId, sessions.GetActiveDeviceId(userId));
+        return activeElsewhere;
+    }
 
     await firestore.UpdateLastLoginAsync(userId, request.Username, ct);
 
@@ -454,7 +464,7 @@ static IResult? RequireTreeGrowthSession(string? userId, string? sessionId, ISer
     return null;
 }
 
-record LoginRequest(string? UserId, string? Username, string? InitData, string? DeviceId);
+record LoginRequest(string? UserId, string? Username, string? InitData, string? DeviceId, string? DeviceInfo);
 
 record HeartbeatRequest(string? SessionId);
 

@@ -4,7 +4,7 @@ namespace Everything_Lost_Backend;
 
 internal sealed partial class FirestoreService
 {
-    private const long PaidBoxBasePrice = 75;
+    private const long PaidBoxBasePrice = 150;
     private const long PaidBoxMaximumPrice = 1_000_000;
 
     private static long PaidBoxPrice(long purchasesToday)
