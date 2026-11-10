@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/Temp/
+**/wwwroot-Build-old-*/
+build-check/
+.git/
+.idea/
+.claude/
+*firebase-adminsdk*.json
+*.md
