@@ -5595,18 +5595,6 @@ var tempI64;
       return buffer;
     }
 
-  function _Telegram_GetUserId() {
-      var webApp = window.Telegram && window.Telegram.WebApp;
-      var user = webApp && webApp.initDataUnsafe && webApp.initDataUnsafe.user;
-      if (!user || user.id == null) return 0;
-  
-      var id = String(user.id);
-      var size = lengthBytesUTF8(id) + 1;
-      var buffer = _malloc(size);
-      stringToUTF8(id, buffer, size);
-      return buffer;
-    }
-
   var ___assert_fail = (condition, filename, line, func) =>
       abort(`Assertion failed: ${UTF8ToString(condition)}, at: ` + [filename ? UTF8ToString(filename) : 'unknown filename', line, func ? UTF8ToString(func) : 'unknown function']);
 
@@ -17460,22 +17448,28 @@ var dynCall_iij = makeInvalidEarlyAccess('dynCall_iij');
 var dynCall_jii = makeInvalidEarlyAccess('dynCall_jii');
 var dynCall_viiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiii');
 var dynCall_j = makeInvalidEarlyAccess('dynCall_j');
-var dynCall_iiiijii = makeInvalidEarlyAccess('dynCall_iiiijii');
 var dynCall_iji = makeInvalidEarlyAccess('dynCall_iji');
-var dynCall_jjji = makeInvalidEarlyAccess('dynCall_jjji');
-var dynCall_jiiiii = makeInvalidEarlyAccess('dynCall_jiiiii');
+var dynCall_vidi = makeInvalidEarlyAccess('dynCall_vidi');
+var dynCall_viji = makeInvalidEarlyAccess('dynCall_viji');
+var dynCall_vifi = makeInvalidEarlyAccess('dynCall_vifi');
+var dynCall_viidi = makeInvalidEarlyAccess('dynCall_viidi');
+var dynCall_viiji = makeInvalidEarlyAccess('dynCall_viiji');
+var dynCall_viifi = makeInvalidEarlyAccess('dynCall_viifi');
+var dynCall_viiidi = makeInvalidEarlyAccess('dynCall_viiidi');
+var dynCall_viiiji = makeInvalidEarlyAccess('dynCall_viiiji');
+var dynCall_viiifi = makeInvalidEarlyAccess('dynCall_viiifi');
+var dynCall_viiffi = makeInvalidEarlyAccess('dynCall_viiffi');
+var dynCall_viidiji = makeInvalidEarlyAccess('dynCall_viidiji');
+var dynCall_viidjii = makeInvalidEarlyAccess('dynCall_viidjii');
+var dynCall_iiiijii = makeInvalidEarlyAccess('dynCall_iiiijii');
+var dynCall_iiiidii = makeInvalidEarlyAccess('dynCall_iiiidii');
 var dynCall_iijiii = makeInvalidEarlyAccess('dynCall_iijiii');
 var dynCall_vijii = makeInvalidEarlyAccess('dynCall_vijii');
-var dynCall_fifi = makeInvalidEarlyAccess('dynCall_fifi');
-var dynCall_vifi = makeInvalidEarlyAccess('dynCall_vifi');
-var dynCall_viifi = makeInvalidEarlyAccess('dynCall_viifi');
-var dynCall_iiiidii = makeInvalidEarlyAccess('dynCall_iiiidii');
+var dynCall_iiji = makeInvalidEarlyAccess('dynCall_iiji');
+var dynCall_iifi = makeInvalidEarlyAccess('dynCall_iifi');
+var dynCall_iiiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiiiiiiiiii');
+var dynCall_viiiiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiii');
 var dynCall_fii = makeInvalidEarlyAccess('dynCall_fii');
-var dynCall_viji = makeInvalidEarlyAccess('dynCall_viji');
-var dynCall_viiji = makeInvalidEarlyAccess('dynCall_viiji');
-var dynCall_vidi = makeInvalidEarlyAccess('dynCall_vidi');
-var dynCall_viidi = makeInvalidEarlyAccess('dynCall_viidi');
-var dynCall_viiifi = makeInvalidEarlyAccess('dynCall_viiifi');
 var dynCall_viiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiii');
 var dynCall_ffii = makeInvalidEarlyAccess('dynCall_ffii');
 var dynCall_viiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiiiii');
@@ -17487,66 +17481,47 @@ var dynCall_viffi = makeInvalidEarlyAccess('dynCall_viffi');
 var dynCall_ffi = makeInvalidEarlyAccess('dynCall_ffi');
 var dynCall_viiffffi = makeInvalidEarlyAccess('dynCall_viiffffi');
 var dynCall_fi = makeInvalidEarlyAccess('dynCall_fi');
-var dynCall_iiji = makeInvalidEarlyAccess('dynCall_iiji');
-var dynCall_iiiiiiifiiii = makeInvalidEarlyAccess('dynCall_iiiiiiifiiii');
-var dynCall_iiiifiiii = makeInvalidEarlyAccess('dynCall_iiiifiiii');
-var dynCall_iiiifii = makeInvalidEarlyAccess('dynCall_iiiifii');
-var dynCall_iiifii = makeInvalidEarlyAccess('dynCall_iiifii');
-var dynCall_viiiifii = makeInvalidEarlyAccess('dynCall_viiiifii');
-var dynCall_dddi = makeInvalidEarlyAccess('dynCall_dddi');
-var dynCall_fffi = makeInvalidEarlyAccess('dynCall_fffi');
-var dynCall_viffiiiii = makeInvalidEarlyAccess('dynCall_viffiiiii');
-var dynCall_viiidi = makeInvalidEarlyAccess('dynCall_viiidi');
-var dynCall_viiiiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiii');
-var dynCall_iiiiiffiffiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiffiffiiiiiiiiiiii');
-var dynCall_viiiiffiiifiiii = makeInvalidEarlyAccess('dynCall_viiiiffiiifiiii');
+var dynCall_ddiii = makeInvalidEarlyAccess('dynCall_ddiii');
+var dynCall_iiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiiiiii');
+var dynCall_iiffi = makeInvalidEarlyAccess('dynCall_iiffi');
+var dynCall_iiiffi = makeInvalidEarlyAccess('dynCall_iiiffi');
+var dynCall_viiiifi = makeInvalidEarlyAccess('dynCall_viiiifi');
+var dynCall_vifiiiii = makeInvalidEarlyAccess('dynCall_vifiiiii');
+var dynCall_viffffffi = makeInvalidEarlyAccess('dynCall_viffffffi');
+var dynCall_viiifii = makeInvalidEarlyAccess('dynCall_viiifii');
+var dynCall_fiiiii = makeInvalidEarlyAccess('dynCall_fiiiii');
+var dynCall_iiifi = makeInvalidEarlyAccess('dynCall_iiifi');
+var dynCall_vifii = makeInvalidEarlyAccess('dynCall_vifii');
 var dynCall_vffi = makeInvalidEarlyAccess('dynCall_vffi');
 var dynCall_iifii = makeInvalidEarlyAccess('dynCall_iifii');
 var dynCall_vfi = makeInvalidEarlyAccess('dynCall_vfi');
 var dynCall_fiiii = makeInvalidEarlyAccess('dynCall_fiiii');
+var dynCall_iiiiiiifiiii = makeInvalidEarlyAccess('dynCall_iiiiiiifiiii');
+var dynCall_iiiifiiii = makeInvalidEarlyAccess('dynCall_iiiifiiii');
+var dynCall_dddi = makeInvalidEarlyAccess('dynCall_dddi');
+var dynCall_fffi = makeInvalidEarlyAccess('dynCall_fffi');
 var dynCall_dii = makeInvalidEarlyAccess('dynCall_dii');
-var dynCall_iiifiiiiiii = makeInvalidEarlyAccess('dynCall_iiifiiiiiii');
-var dynCall_iidi = makeInvalidEarlyAccess('dynCall_iidi');
-var dynCall_iifi = makeInvalidEarlyAccess('dynCall_iifi');
-var dynCall_ddiii = makeInvalidEarlyAccess('dynCall_ddiii');
-var dynCall_iiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiiiiii');
-var dynCall_vifiiiii = makeInvalidEarlyAccess('dynCall_vifiiiii');
-var dynCall_viffffffi = makeInvalidEarlyAccess('dynCall_viffffffi');
-var dynCall_viiifii = makeInvalidEarlyAccess('dynCall_viiifii');
-var dynCall_viiiiiiifiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiifiiiiii');
-var dynCall_iiijii = makeInvalidEarlyAccess('dynCall_iiijii');
-var dynCall_iiifi = makeInvalidEarlyAccess('dynCall_iiifi');
-var dynCall_fiffffi = makeInvalidEarlyAccess('dynCall_fiffffi');
 var dynCall_jiii = makeInvalidEarlyAccess('dynCall_jiii');
-var dynCall_iiddi = makeInvalidEarlyAccess('dynCall_iiddi');
-var dynCall_iijji = makeInvalidEarlyAccess('dynCall_iijji');
-var dynCall_iiffi = makeInvalidEarlyAccess('dynCall_iiffi');
+var dynCall_iidi = makeInvalidEarlyAccess('dynCall_iidi');
+var dynCall_fifi = makeInvalidEarlyAccess('dynCall_fifi');
 var dynCall_viififiii = makeInvalidEarlyAccess('dynCall_viififiii');
 var dynCall_fiiffi = makeInvalidEarlyAccess('dynCall_fiiffi');
 var dynCall_viififiiii = makeInvalidEarlyAccess('dynCall_viififiiii');
 var dynCall_vififiiii = makeInvalidEarlyAccess('dynCall_vififiiii');
 var dynCall_fiffi = makeInvalidEarlyAccess('dynCall_fiffi');
 var dynCall_iiiifi = makeInvalidEarlyAccess('dynCall_iiiifi');
-var dynCall_iiiffi = makeInvalidEarlyAccess('dynCall_iiiffi');
-var dynCall_viiiifi = makeInvalidEarlyAccess('dynCall_viiiifi');
-var dynCall_fiiiii = makeInvalidEarlyAccess('dynCall_fiiiii');
-var dynCall_vifii = makeInvalidEarlyAccess('dynCall_vifii');
-var dynCall_iiiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiiiiiiiiii');
+var dynCall_viiiiiiifiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiifiiiiii');
+var dynCall_iiijii = makeInvalidEarlyAccess('dynCall_iiijii');
+var dynCall_iiiifii = makeInvalidEarlyAccess('dynCall_iiiifii');
+var dynCall_iiifii = makeInvalidEarlyAccess('dynCall_iiifii');
+var dynCall_viiiifii = makeInvalidEarlyAccess('dynCall_viiiifii');
+var dynCall_iiifiiiiiii = makeInvalidEarlyAccess('dynCall_iiifiiiiiii');
+var dynCall_iiddi = makeInvalidEarlyAccess('dynCall_iiddi');
+var dynCall_iijji = makeInvalidEarlyAccess('dynCall_iijji');
+var dynCall_fiffffi = makeInvalidEarlyAccess('dynCall_fiffffi');
+var dynCall_iiiiiffiffiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiffiffiiiiiiiiiiii');
+var dynCall_viiiiffiiifiiii = makeInvalidEarlyAccess('dynCall_viiiiffiiifiiii');
 var dynCall_di = makeInvalidEarlyAccess('dynCall_di');
-var dynCall_viiiji = makeInvalidEarlyAccess('dynCall_viiiji');
-var dynCall_viiffi = makeInvalidEarlyAccess('dynCall_viiffi');
-var dynCall_viidiji = makeInvalidEarlyAccess('dynCall_viidiji');
-var dynCall_viidjii = makeInvalidEarlyAccess('dynCall_viidjii');
-var dynCall_jijii = makeInvalidEarlyAccess('dynCall_jijii');
-var dynCall_iiiiiiiiiji = makeInvalidEarlyAccess('dynCall_iiiiiiiiiji');
-var dynCall_vji = makeInvalidEarlyAccess('dynCall_vji');
-var dynCall_diiii = makeInvalidEarlyAccess('dynCall_diiii');
-var dynCall_iiidii = makeInvalidEarlyAccess('dynCall_iiidii');
-var dynCall_jiijii = makeInvalidEarlyAccess('dynCall_jiijii');
-var dynCall_viijiii = makeInvalidEarlyAccess('dynCall_viijiii');
-var dynCall_viiijiii = makeInvalidEarlyAccess('dynCall_viiijiii');
-var dynCall_jiiji = makeInvalidEarlyAccess('dynCall_jiiji');
-var dynCall_jiiijii = makeInvalidEarlyAccess('dynCall_jiiijii');
 var dynCall_viiiidi = makeInvalidEarlyAccess('dynCall_viiiidi');
 var dynCall_iiiiiiidii = makeInvalidEarlyAccess('dynCall_iiiiiiidii');
 var dynCall_viiidiii = makeInvalidEarlyAccess('dynCall_viiidiii');
@@ -17555,12 +17530,25 @@ var dynCall_viiiiidi = makeInvalidEarlyAccess('dynCall_viiiiidi');
 var dynCall_ji = makeInvalidEarlyAccess('dynCall_ji');
 var dynCall_viiiifiiii = makeInvalidEarlyAccess('dynCall_viiiifiiii');
 var dynCall_viiiiifiiii = makeInvalidEarlyAccess('dynCall_viiiiifiiii');
+var dynCall_jiijii = makeInvalidEarlyAccess('dynCall_jiijii');
+var dynCall_viijiii = makeInvalidEarlyAccess('dynCall_viijiii');
+var dynCall_viiijiii = makeInvalidEarlyAccess('dynCall_viiijiii');
+var dynCall_jiiji = makeInvalidEarlyAccess('dynCall_jiiji');
+var dynCall_jiiijii = makeInvalidEarlyAccess('dynCall_jiiijii');
+var dynCall_iiiiiiiiiji = makeInvalidEarlyAccess('dynCall_iiiiiiiiiji');
+var dynCall_vji = makeInvalidEarlyAccess('dynCall_vji');
+var dynCall_jjji = makeInvalidEarlyAccess('dynCall_jjji');
+var dynCall_jiiiii = makeInvalidEarlyAccess('dynCall_jiiiii');
 var dynCall_diiiii = makeInvalidEarlyAccess('dynCall_diiiii');
-var dynCall_vijiii = makeInvalidEarlyAccess('dynCall_vijiii');
+var dynCall_diiii = makeInvalidEarlyAccess('dynCall_diiii');
+var dynCall_iiidii = makeInvalidEarlyAccess('dynCall_iiidii');
+var dynCall_jijii = makeInvalidEarlyAccess('dynCall_jijii');
 var dynCall_ijji = makeInvalidEarlyAccess('dynCall_ijji');
+var dynCall_iijii = makeInvalidEarlyAccess('dynCall_iijii');
+var dynCall_vijiii = makeInvalidEarlyAccess('dynCall_vijiii');
 var dynCall_vjjjiiii = makeInvalidEarlyAccess('dynCall_vjjjiiii');
 var dynCall_vjiiiii = makeInvalidEarlyAccess('dynCall_vjiiiii');
-var dynCall_iijii = makeInvalidEarlyAccess('dynCall_iijii');
+var dynCall_viffiiiii = makeInvalidEarlyAccess('dynCall_viffiiiii');
 var dynCall_iiffii = makeInvalidEarlyAccess('dynCall_iiffii');
 var dynCall_iiifiii = makeInvalidEarlyAccess('dynCall_iiifiii');
 var dynCall_iiififii = makeInvalidEarlyAccess('dynCall_iiififii');
@@ -17571,17 +17559,10 @@ var dynCall_iiiifiii = makeInvalidEarlyAccess('dynCall_iiiifiii');
 var dynCall_iiifiiii = makeInvalidEarlyAccess('dynCall_iiifiiii');
 var dynCall_iiiffiii = makeInvalidEarlyAccess('dynCall_iiiffiii');
 var dynCall_iiiiifii = makeInvalidEarlyAccess('dynCall_iiiiifii');
-var dynCall_iiifffffii = makeInvalidEarlyAccess('dynCall_iiifffffii');
-var dynCall_jji = makeInvalidEarlyAccess('dynCall_jji');
-var dynCall_viffiii = makeInvalidEarlyAccess('dynCall_viffiii');
 var dynCall_ijiiiii = makeInvalidEarlyAccess('dynCall_ijiiiii');
 var dynCall_iijiiii = makeInvalidEarlyAccess('dynCall_iijiiii');
-var dynCall_viiiiijijii = makeInvalidEarlyAccess('dynCall_viiiiijijii');
-var dynCall_viiijii = makeInvalidEarlyAccess('dynCall_viiijii');
-var dynCall_viiiiiijijii = makeInvalidEarlyAccess('dynCall_viiiiiijijii');
-var dynCall_viijji = makeInvalidEarlyAccess('dynCall_viijji');
-var dynCall_vijji = makeInvalidEarlyAccess('dynCall_vijji');
-var dynCall_vijiji = makeInvalidEarlyAccess('dynCall_vijiji');
+var dynCall_jji = makeInvalidEarlyAccess('dynCall_jji');
+var dynCall_viffiii = makeInvalidEarlyAccess('dynCall_viffiii');
 var dynCall_iiffffiii = makeInvalidEarlyAccess('dynCall_iiffffiii');
 var dynCall_iiidfi = makeInvalidEarlyAccess('dynCall_iiidfi');
 var dynCall_iiijfi = makeInvalidEarlyAccess('dynCall_iiijfi');
@@ -17653,6 +17634,7 @@ var dynCall_iiiji = makeInvalidEarlyAccess('dynCall_iiiji');
 var dynCall_viiiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiiiiii');
 var dynCall_iiiiji = makeInvalidEarlyAccess('dynCall_iiiiji');
 var dynCall_iiiiiji = makeInvalidEarlyAccess('dynCall_iiiiiji');
+var dynCall_viiijii = makeInvalidEarlyAccess('dynCall_viiijii');
 var dynCall_ifiiifiiiiiii = makeInvalidEarlyAccess('dynCall_ifiiifiiiiiii');
 var dynCall_jjii = makeInvalidEarlyAccess('dynCall_jjii');
 var dynCall_ijiiiiiiiii = makeInvalidEarlyAccess('dynCall_ijiiiiiiiii');
@@ -17668,6 +17650,7 @@ var dynCall_ijiiii = makeInvalidEarlyAccess('dynCall_ijiiii');
 var dynCall_iiiifiiiiii = makeInvalidEarlyAccess('dynCall_iiiifiiiiii');
 var dynCall_iiiifiiiii = makeInvalidEarlyAccess('dynCall_iiiifiiiii');
 var dynCall_iffffi = makeInvalidEarlyAccess('dynCall_iffffi');
+var dynCall_vijji = makeInvalidEarlyAccess('dynCall_vijji');
 var dynCall_viiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiiii');
 var dynCall_vfffi = makeInvalidEarlyAccess('dynCall_vfffi');
 var dynCall_vifffi = makeInvalidEarlyAccess('dynCall_vifffi');
@@ -17679,7 +17662,6 @@ var dynCall_vfiii = makeInvalidEarlyAccess('dynCall_vfiii');
 var dynCall_fdi = makeInvalidEarlyAccess('dynCall_fdi');
 var dynCall_vfii = makeInvalidEarlyAccess('dynCall_vfii');
 var dynCall_vjiiii = makeInvalidEarlyAccess('dynCall_vjiiii');
-var dynCall_viifffi = makeInvalidEarlyAccess('dynCall_viifffi');
 var dynCall_vijiiii = makeInvalidEarlyAccess('dynCall_vijiiii');
 var dynCall_viiijiiii = makeInvalidEarlyAccess('dynCall_viiijiiii');
 var dynCall_viiiijiii = makeInvalidEarlyAccess('dynCall_viiiijiii');
@@ -17715,6 +17697,7 @@ var dynCall_iiiiiiffiiiiiiiiiffffiiii = makeInvalidEarlyAccess('dynCall_iiiiiiff
 var dynCall_iiiiiiffiiiiiiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiiiiiffiiiiiiiiiiiiiii');
 var dynCall_iiffiiiiiiiiii = makeInvalidEarlyAccess('dynCall_iiffiiiiiiiiii');
 var dynCall_viiiiiiiiiiffiii = makeInvalidEarlyAccess('dynCall_viiiiiiiiiiffiii');
+var dynCall_viijji = makeInvalidEarlyAccess('dynCall_viijji');
 var dynCall_viiiiiiifffiii = makeInvalidEarlyAccess('dynCall_viiiiiiifffiii');
 var dynCall_fffffffi = makeInvalidEarlyAccess('dynCall_fffffffi');
 var dynCall_viffifi = makeInvalidEarlyAccess('dynCall_viffifi');
@@ -17756,6 +17739,7 @@ var dynCall_viiffiii = makeInvalidEarlyAccess('dynCall_viiffiii');
 var dynCall_viifffii = makeInvalidEarlyAccess('dynCall_viifffii');
 var dynCall_viififfi = makeInvalidEarlyAccess('dynCall_viififfi');
 var dynCall_viififi = makeInvalidEarlyAccess('dynCall_viififi');
+var dynCall_viifffi = makeInvalidEarlyAccess('dynCall_viifffi');
 var dynCall_iijjijii = makeInvalidEarlyAccess('dynCall_iijjijii');
 var dynCall_iijjiijii = makeInvalidEarlyAccess('dynCall_iijjiijii');
 var dynCall_iiiiijji = makeInvalidEarlyAccess('dynCall_iiiiijji');
@@ -17869,6 +17853,7 @@ var dynCall_vdii = makeInvalidEarlyAccess('dynCall_vdii');
 var dynCall_diddi = makeInvalidEarlyAccess('dynCall_diddi');
 var dynCall_didi = makeInvalidEarlyAccess('dynCall_didi');
 var dynCall_viijijiii = makeInvalidEarlyAccess('dynCall_viijijiii');
+var dynCall_vijiji = makeInvalidEarlyAccess('dynCall_vijiji');
 var dynCall_viijiijiii = makeInvalidEarlyAccess('dynCall_viijiijiii');
 var dynCall_viiiijiiii = makeInvalidEarlyAccess('dynCall_viiiijiiii');
 var dynCall_jiiiiii = makeInvalidEarlyAccess('dynCall_jiiiiii');
@@ -17888,7 +17873,6 @@ var dynCall_iiddfi = makeInvalidEarlyAccess('dynCall_iiddfi');
 var dynCall_iijfii = makeInvalidEarlyAccess('dynCall_iijfii');
 var dynCall_iijfi = makeInvalidEarlyAccess('dynCall_iijfi');
 var dynCall_iijjfi = makeInvalidEarlyAccess('dynCall_iijjfi');
-var dynCall_viiiddi = makeInvalidEarlyAccess('dynCall_viiiddi');
 var dynCall_iiiiiiffidi = makeInvalidEarlyAccess('dynCall_iiiiiiffidi');
 var dynCall_iiiiffffidi = makeInvalidEarlyAccess('dynCall_iiiiffffidi');
 var dynCall_vjjiii = makeInvalidEarlyAccess('dynCall_vjjiii');
@@ -17943,7 +17927,6 @@ var dynCall_viiiffffffi = makeInvalidEarlyAccess('dynCall_viiiffffffi');
 var dynCall_iijjiii = makeInvalidEarlyAccess('dynCall_iijjiii');
 var dynCall_vijjjii = makeInvalidEarlyAccess('dynCall_vijjjii');
 var dynCall_viid = makeInvalidEarlyAccess('dynCall_viid');
-var dynCall_viiif = makeInvalidEarlyAccess('dynCall_viiif');
 var dynCall_ffjfj = makeInvalidEarlyAccess('dynCall_ffjfj');
 var dynCall_fiiiif = makeInvalidEarlyAccess('dynCall_fiiiif');
 var dynCall_iiiiiifff = makeInvalidEarlyAccess('dynCall_iiiiiifff');
@@ -17967,6 +17950,7 @@ var dynCall_viiiifiiiiif = makeInvalidEarlyAccess('dynCall_viiiifiiiiif');
 var dynCall_iifff = makeInvalidEarlyAccess('dynCall_iifff');
 var dynCall_viijijj = makeInvalidEarlyAccess('dynCall_viijijj');
 var dynCall_viiiij = makeInvalidEarlyAccess('dynCall_viiiij');
+var dynCall_viiif = makeInvalidEarlyAccess('dynCall_viiif');
 var dynCall_viffffffffffffiiii = makeInvalidEarlyAccess('dynCall_viffffffffffffiiii');
 var dynCall_iif = makeInvalidEarlyAccess('dynCall_iif');
 var dynCall_jiij = makeInvalidEarlyAccess('dynCall_jiij');
@@ -18134,38 +18118,50 @@ function assignWasmExports(wasmExports) {
   dynCall_viiiiiiii = dynCalls['viiiiiiii'] = createExportWrapper('dynCall_viiiiiiii', 9);
   assert(typeof wasmExports['dynCall_j'] != 'undefined', 'missing Wasm export: dynCall_j');
   dynCall_j = dynCalls['j'] = createExportWrapper('dynCall_j', 1);
-  assert(typeof wasmExports['dynCall_iiiijii'] != 'undefined', 'missing Wasm export: dynCall_iiiijii');
-  dynCall_iiiijii = dynCalls['iiiijii'] = createExportWrapper('dynCall_iiiijii', 8);
   assert(typeof wasmExports['dynCall_iji'] != 'undefined', 'missing Wasm export: dynCall_iji');
   dynCall_iji = dynCalls['iji'] = createExportWrapper('dynCall_iji', 4);
-  assert(typeof wasmExports['dynCall_jjji'] != 'undefined', 'missing Wasm export: dynCall_jjji');
-  dynCall_jjji = dynCalls['jjji'] = createExportWrapper('dynCall_jjji', 6);
-  assert(typeof wasmExports['dynCall_jiiiii'] != 'undefined', 'missing Wasm export: dynCall_jiiiii');
-  dynCall_jiiiii = dynCalls['jiiiii'] = createExportWrapper('dynCall_jiiiii', 6);
+  assert(typeof wasmExports['dynCall_vidi'] != 'undefined', 'missing Wasm export: dynCall_vidi');
+  dynCall_vidi = dynCalls['vidi'] = createExportWrapper('dynCall_vidi', 4);
+  assert(typeof wasmExports['dynCall_viji'] != 'undefined', 'missing Wasm export: dynCall_viji');
+  dynCall_viji = dynCalls['viji'] = createExportWrapper('dynCall_viji', 5);
+  assert(typeof wasmExports['dynCall_vifi'] != 'undefined', 'missing Wasm export: dynCall_vifi');
+  dynCall_vifi = dynCalls['vifi'] = createExportWrapper('dynCall_vifi', 4);
+  assert(typeof wasmExports['dynCall_viidi'] != 'undefined', 'missing Wasm export: dynCall_viidi');
+  dynCall_viidi = dynCalls['viidi'] = createExportWrapper('dynCall_viidi', 5);
+  assert(typeof wasmExports['dynCall_viiji'] != 'undefined', 'missing Wasm export: dynCall_viiji');
+  dynCall_viiji = dynCalls['viiji'] = createExportWrapper('dynCall_viiji', 6);
+  assert(typeof wasmExports['dynCall_viifi'] != 'undefined', 'missing Wasm export: dynCall_viifi');
+  dynCall_viifi = dynCalls['viifi'] = createExportWrapper('dynCall_viifi', 5);
+  assert(typeof wasmExports['dynCall_viiidi'] != 'undefined', 'missing Wasm export: dynCall_viiidi');
+  dynCall_viiidi = dynCalls['viiidi'] = createExportWrapper('dynCall_viiidi', 6);
+  assert(typeof wasmExports['dynCall_viiiji'] != 'undefined', 'missing Wasm export: dynCall_viiiji');
+  dynCall_viiiji = dynCalls['viiiji'] = createExportWrapper('dynCall_viiiji', 7);
+  assert(typeof wasmExports['dynCall_viiifi'] != 'undefined', 'missing Wasm export: dynCall_viiifi');
+  dynCall_viiifi = dynCalls['viiifi'] = createExportWrapper('dynCall_viiifi', 6);
+  assert(typeof wasmExports['dynCall_viiffi'] != 'undefined', 'missing Wasm export: dynCall_viiffi');
+  dynCall_viiffi = dynCalls['viiffi'] = createExportWrapper('dynCall_viiffi', 6);
+  assert(typeof wasmExports['dynCall_viidiji'] != 'undefined', 'missing Wasm export: dynCall_viidiji');
+  dynCall_viidiji = dynCalls['viidiji'] = createExportWrapper('dynCall_viidiji', 8);
+  assert(typeof wasmExports['dynCall_viidjii'] != 'undefined', 'missing Wasm export: dynCall_viidjii');
+  dynCall_viidjii = dynCalls['viidjii'] = createExportWrapper('dynCall_viidjii', 8);
+  assert(typeof wasmExports['dynCall_iiiijii'] != 'undefined', 'missing Wasm export: dynCall_iiiijii');
+  dynCall_iiiijii = dynCalls['iiiijii'] = createExportWrapper('dynCall_iiiijii', 8);
+  assert(typeof wasmExports['dynCall_iiiidii'] != 'undefined', 'missing Wasm export: dynCall_iiiidii');
+  dynCall_iiiidii = dynCalls['iiiidii'] = createExportWrapper('dynCall_iiiidii', 7);
   assert(typeof wasmExports['dynCall_iijiii'] != 'undefined', 'missing Wasm export: dynCall_iijiii');
   dynCall_iijiii = dynCalls['iijiii'] = createExportWrapper('dynCall_iijiii', 7);
   assert(typeof wasmExports['dynCall_vijii'] != 'undefined', 'missing Wasm export: dynCall_vijii');
   dynCall_vijii = dynCalls['vijii'] = createExportWrapper('dynCall_vijii', 6);
-  assert(typeof wasmExports['dynCall_fifi'] != 'undefined', 'missing Wasm export: dynCall_fifi');
-  dynCall_fifi = dynCalls['fifi'] = createExportWrapper('dynCall_fifi', 4);
-  assert(typeof wasmExports['dynCall_vifi'] != 'undefined', 'missing Wasm export: dynCall_vifi');
-  dynCall_vifi = dynCalls['vifi'] = createExportWrapper('dynCall_vifi', 4);
-  assert(typeof wasmExports['dynCall_viifi'] != 'undefined', 'missing Wasm export: dynCall_viifi');
-  dynCall_viifi = dynCalls['viifi'] = createExportWrapper('dynCall_viifi', 5);
-  assert(typeof wasmExports['dynCall_iiiidii'] != 'undefined', 'missing Wasm export: dynCall_iiiidii');
-  dynCall_iiiidii = dynCalls['iiiidii'] = createExportWrapper('dynCall_iiiidii', 7);
+  assert(typeof wasmExports['dynCall_iiji'] != 'undefined', 'missing Wasm export: dynCall_iiji');
+  dynCall_iiji = dynCalls['iiji'] = createExportWrapper('dynCall_iiji', 5);
+  assert(typeof wasmExports['dynCall_iifi'] != 'undefined', 'missing Wasm export: dynCall_iifi');
+  dynCall_iifi = dynCalls['iifi'] = createExportWrapper('dynCall_iifi', 4);
+  assert(typeof wasmExports['dynCall_iiiiiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiiiiiii');
+  dynCall_iiiiiiiiiiiiii = dynCalls['iiiiiiiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiiiiiiii', 14);
+  assert(typeof wasmExports['dynCall_viiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiiiiii');
+  dynCall_viiiiiiiiiii = dynCalls['viiiiiiiiiii'] = createExportWrapper('dynCall_viiiiiiiiiii', 12);
   assert(typeof wasmExports['dynCall_fii'] != 'undefined', 'missing Wasm export: dynCall_fii');
   dynCall_fii = dynCalls['fii'] = createExportWrapper('dynCall_fii', 3);
-  assert(typeof wasmExports['dynCall_viji'] != 'undefined', 'missing Wasm export: dynCall_viji');
-  dynCall_viji = dynCalls['viji'] = createExportWrapper('dynCall_viji', 5);
-  assert(typeof wasmExports['dynCall_viiji'] != 'undefined', 'missing Wasm export: dynCall_viiji');
-  dynCall_viiji = dynCalls['viiji'] = createExportWrapper('dynCall_viiji', 6);
-  assert(typeof wasmExports['dynCall_vidi'] != 'undefined', 'missing Wasm export: dynCall_vidi');
-  dynCall_vidi = dynCalls['vidi'] = createExportWrapper('dynCall_vidi', 4);
-  assert(typeof wasmExports['dynCall_viidi'] != 'undefined', 'missing Wasm export: dynCall_viidi');
-  dynCall_viidi = dynCalls['viidi'] = createExportWrapper('dynCall_viidi', 5);
-  assert(typeof wasmExports['dynCall_viiifi'] != 'undefined', 'missing Wasm export: dynCall_viiifi');
-  dynCall_viiifi = dynCalls['viiifi'] = createExportWrapper('dynCall_viiifi', 6);
   assert(typeof wasmExports['dynCall_viiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiiii');
   dynCall_viiiiiiiii = dynCalls['viiiiiiiii'] = createExportWrapper('dynCall_viiiiiiiii', 10);
   assert(typeof wasmExports['dynCall_ffii'] != 'undefined', 'missing Wasm export: dynCall_ffii');
@@ -18188,32 +18184,28 @@ function assignWasmExports(wasmExports) {
   dynCall_viiffffi = dynCalls['viiffffi'] = createExportWrapper('dynCall_viiffffi', 8);
   assert(typeof wasmExports['dynCall_fi'] != 'undefined', 'missing Wasm export: dynCall_fi');
   dynCall_fi = dynCalls['fi'] = createExportWrapper('dynCall_fi', 2);
-  assert(typeof wasmExports['dynCall_iiji'] != 'undefined', 'missing Wasm export: dynCall_iiji');
-  dynCall_iiji = dynCalls['iiji'] = createExportWrapper('dynCall_iiji', 5);
-  assert(typeof wasmExports['dynCall_iiiiiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiifiiii');
-  dynCall_iiiiiiifiiii = dynCalls['iiiiiiifiiii'] = createExportWrapper('dynCall_iiiiiiifiiii', 12);
-  assert(typeof wasmExports['dynCall_iiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiifiiii');
-  dynCall_iiiifiiii = dynCalls['iiiifiiii'] = createExportWrapper('dynCall_iiiifiiii', 9);
-  assert(typeof wasmExports['dynCall_iiiifii'] != 'undefined', 'missing Wasm export: dynCall_iiiifii');
-  dynCall_iiiifii = dynCalls['iiiifii'] = createExportWrapper('dynCall_iiiifii', 7);
-  assert(typeof wasmExports['dynCall_iiifii'] != 'undefined', 'missing Wasm export: dynCall_iiifii');
-  dynCall_iiifii = dynCalls['iiifii'] = createExportWrapper('dynCall_iiifii', 6);
-  assert(typeof wasmExports['dynCall_viiiifii'] != 'undefined', 'missing Wasm export: dynCall_viiiifii');
-  dynCall_viiiifii = dynCalls['viiiifii'] = createExportWrapper('dynCall_viiiifii', 8);
-  assert(typeof wasmExports['dynCall_dddi'] != 'undefined', 'missing Wasm export: dynCall_dddi');
-  dynCall_dddi = dynCalls['dddi'] = createExportWrapper('dynCall_dddi', 4);
-  assert(typeof wasmExports['dynCall_fffi'] != 'undefined', 'missing Wasm export: dynCall_fffi');
-  dynCall_fffi = dynCalls['fffi'] = createExportWrapper('dynCall_fffi', 4);
-  assert(typeof wasmExports['dynCall_viffiiiii'] != 'undefined', 'missing Wasm export: dynCall_viffiiiii');
-  dynCall_viffiiiii = dynCalls['viffiiiii'] = createExportWrapper('dynCall_viffiiiii', 9);
-  assert(typeof wasmExports['dynCall_viiidi'] != 'undefined', 'missing Wasm export: dynCall_viiidi');
-  dynCall_viiidi = dynCalls['viiidi'] = createExportWrapper('dynCall_viiidi', 6);
-  assert(typeof wasmExports['dynCall_viiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiiiiii');
-  dynCall_viiiiiiiiiii = dynCalls['viiiiiiiiiii'] = createExportWrapper('dynCall_viiiiiiiiiii', 12);
-  assert(typeof wasmExports['dynCall_iiiiiffiffiiiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiffiffiiiiiiiiiiii');
-  dynCall_iiiiiffiffiiiiiiiiiiii = dynCalls['iiiiiffiffiiiiiiiiiiii'] = createExportWrapper('dynCall_iiiiiffiffiiiiiiiiiiii', 22);
-  assert(typeof wasmExports['dynCall_viiiiffiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiffiiifiiii');
-  dynCall_viiiiffiiifiiii = dynCalls['viiiiffiiifiiii'] = createExportWrapper('dynCall_viiiiffiiifiiii', 15);
+  assert(typeof wasmExports['dynCall_ddiii'] != 'undefined', 'missing Wasm export: dynCall_ddiii');
+  dynCall_ddiii = dynCalls['ddiii'] = createExportWrapper('dynCall_ddiii', 5);
+  assert(typeof wasmExports['dynCall_iiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiii');
+  dynCall_iiiiiiiiii = dynCalls['iiiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiiii', 10);
+  assert(typeof wasmExports['dynCall_iiffi'] != 'undefined', 'missing Wasm export: dynCall_iiffi');
+  dynCall_iiffi = dynCalls['iiffi'] = createExportWrapper('dynCall_iiffi', 5);
+  assert(typeof wasmExports['dynCall_iiiffi'] != 'undefined', 'missing Wasm export: dynCall_iiiffi');
+  dynCall_iiiffi = dynCalls['iiiffi'] = createExportWrapper('dynCall_iiiffi', 6);
+  assert(typeof wasmExports['dynCall_viiiifi'] != 'undefined', 'missing Wasm export: dynCall_viiiifi');
+  dynCall_viiiifi = dynCalls['viiiifi'] = createExportWrapper('dynCall_viiiifi', 7);
+  assert(typeof wasmExports['dynCall_vifiiiii'] != 'undefined', 'missing Wasm export: dynCall_vifiiiii');
+  dynCall_vifiiiii = dynCalls['vifiiiii'] = createExportWrapper('dynCall_vifiiiii', 8);
+  assert(typeof wasmExports['dynCall_viffffffi'] != 'undefined', 'missing Wasm export: dynCall_viffffffi');
+  dynCall_viffffffi = dynCalls['viffffffi'] = createExportWrapper('dynCall_viffffffi', 9);
+  assert(typeof wasmExports['dynCall_viiifii'] != 'undefined', 'missing Wasm export: dynCall_viiifii');
+  dynCall_viiifii = dynCalls['viiifii'] = createExportWrapper('dynCall_viiifii', 7);
+  assert(typeof wasmExports['dynCall_fiiiii'] != 'undefined', 'missing Wasm export: dynCall_fiiiii');
+  dynCall_fiiiii = dynCalls['fiiiii'] = createExportWrapper('dynCall_fiiiii', 6);
+  assert(typeof wasmExports['dynCall_iiifi'] != 'undefined', 'missing Wasm export: dynCall_iiifi');
+  dynCall_iiifi = dynCalls['iiifi'] = createExportWrapper('dynCall_iiifi', 5);
+  assert(typeof wasmExports['dynCall_vifii'] != 'undefined', 'missing Wasm export: dynCall_vifii');
+  dynCall_vifii = dynCalls['vifii'] = createExportWrapper('dynCall_vifii', 5);
   assert(typeof wasmExports['dynCall_vffi'] != 'undefined', 'missing Wasm export: dynCall_vffi');
   dynCall_vffi = dynCalls['vffi'] = createExportWrapper('dynCall_vffi', 4);
   assert(typeof wasmExports['dynCall_iifii'] != 'undefined', 'missing Wasm export: dynCall_iifii');
@@ -18222,40 +18214,22 @@ function assignWasmExports(wasmExports) {
   dynCall_vfi = dynCalls['vfi'] = createExportWrapper('dynCall_vfi', 3);
   assert(typeof wasmExports['dynCall_fiiii'] != 'undefined', 'missing Wasm export: dynCall_fiiii');
   dynCall_fiiii = dynCalls['fiiii'] = createExportWrapper('dynCall_fiiii', 5);
+  assert(typeof wasmExports['dynCall_iiiiiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiifiiii');
+  dynCall_iiiiiiifiiii = dynCalls['iiiiiiifiiii'] = createExportWrapper('dynCall_iiiiiiifiiii', 12);
+  assert(typeof wasmExports['dynCall_iiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiifiiii');
+  dynCall_iiiifiiii = dynCalls['iiiifiiii'] = createExportWrapper('dynCall_iiiifiiii', 9);
+  assert(typeof wasmExports['dynCall_dddi'] != 'undefined', 'missing Wasm export: dynCall_dddi');
+  dynCall_dddi = dynCalls['dddi'] = createExportWrapper('dynCall_dddi', 4);
+  assert(typeof wasmExports['dynCall_fffi'] != 'undefined', 'missing Wasm export: dynCall_fffi');
+  dynCall_fffi = dynCalls['fffi'] = createExportWrapper('dynCall_fffi', 4);
   assert(typeof wasmExports['dynCall_dii'] != 'undefined', 'missing Wasm export: dynCall_dii');
   dynCall_dii = dynCalls['dii'] = createExportWrapper('dynCall_dii', 3);
-  assert(typeof wasmExports['dynCall_iiifiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiifiiiiiii');
-  dynCall_iiifiiiiiii = dynCalls['iiifiiiiiii'] = createExportWrapper('dynCall_iiifiiiiiii', 11);
-  assert(typeof wasmExports['dynCall_iidi'] != 'undefined', 'missing Wasm export: dynCall_iidi');
-  dynCall_iidi = dynCalls['iidi'] = createExportWrapper('dynCall_iidi', 4);
-  assert(typeof wasmExports['dynCall_iifi'] != 'undefined', 'missing Wasm export: dynCall_iifi');
-  dynCall_iifi = dynCalls['iifi'] = createExportWrapper('dynCall_iifi', 4);
-  assert(typeof wasmExports['dynCall_ddiii'] != 'undefined', 'missing Wasm export: dynCall_ddiii');
-  dynCall_ddiii = dynCalls['ddiii'] = createExportWrapper('dynCall_ddiii', 5);
-  assert(typeof wasmExports['dynCall_iiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiii');
-  dynCall_iiiiiiiiii = dynCalls['iiiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiiii', 10);
-  assert(typeof wasmExports['dynCall_vifiiiii'] != 'undefined', 'missing Wasm export: dynCall_vifiiiii');
-  dynCall_vifiiiii = dynCalls['vifiiiii'] = createExportWrapper('dynCall_vifiiiii', 8);
-  assert(typeof wasmExports['dynCall_viffffffi'] != 'undefined', 'missing Wasm export: dynCall_viffffffi');
-  dynCall_viffffffi = dynCalls['viffffffi'] = createExportWrapper('dynCall_viffffffi', 9);
-  assert(typeof wasmExports['dynCall_viiifii'] != 'undefined', 'missing Wasm export: dynCall_viiifii');
-  dynCall_viiifii = dynCalls['viiifii'] = createExportWrapper('dynCall_viiifii', 7);
-  assert(typeof wasmExports['dynCall_viiiiiiifiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiifiiiiii');
-  dynCall_viiiiiiifiiiiii = dynCalls['viiiiiiifiiiiii'] = createExportWrapper('dynCall_viiiiiiifiiiiii', 15);
-  assert(typeof wasmExports['dynCall_iiijii'] != 'undefined', 'missing Wasm export: dynCall_iiijii');
-  dynCall_iiijii = dynCalls['iiijii'] = createExportWrapper('dynCall_iiijii', 7);
-  assert(typeof wasmExports['dynCall_iiifi'] != 'undefined', 'missing Wasm export: dynCall_iiifi');
-  dynCall_iiifi = dynCalls['iiifi'] = createExportWrapper('dynCall_iiifi', 5);
-  assert(typeof wasmExports['dynCall_fiffffi'] != 'undefined', 'missing Wasm export: dynCall_fiffffi');
-  dynCall_fiffffi = dynCalls['fiffffi'] = createExportWrapper('dynCall_fiffffi', 7);
   assert(typeof wasmExports['dynCall_jiii'] != 'undefined', 'missing Wasm export: dynCall_jiii');
   dynCall_jiii = dynCalls['jiii'] = createExportWrapper('dynCall_jiii', 4);
-  assert(typeof wasmExports['dynCall_iiddi'] != 'undefined', 'missing Wasm export: dynCall_iiddi');
-  dynCall_iiddi = dynCalls['iiddi'] = createExportWrapper('dynCall_iiddi', 5);
-  assert(typeof wasmExports['dynCall_iijji'] != 'undefined', 'missing Wasm export: dynCall_iijji');
-  dynCall_iijji = dynCalls['iijji'] = createExportWrapper('dynCall_iijji', 7);
-  assert(typeof wasmExports['dynCall_iiffi'] != 'undefined', 'missing Wasm export: dynCall_iiffi');
-  dynCall_iiffi = dynCalls['iiffi'] = createExportWrapper('dynCall_iiffi', 5);
+  assert(typeof wasmExports['dynCall_iidi'] != 'undefined', 'missing Wasm export: dynCall_iidi');
+  dynCall_iidi = dynCalls['iidi'] = createExportWrapper('dynCall_iidi', 4);
+  assert(typeof wasmExports['dynCall_fifi'] != 'undefined', 'missing Wasm export: dynCall_fifi');
+  dynCall_fifi = dynCalls['fifi'] = createExportWrapper('dynCall_fifi', 4);
   assert(typeof wasmExports['dynCall_viififiii'] != 'undefined', 'missing Wasm export: dynCall_viififiii');
   dynCall_viififiii = dynCalls['viififiii'] = createExportWrapper('dynCall_viififiii', 9);
   assert(typeof wasmExports['dynCall_fiiffi'] != 'undefined', 'missing Wasm export: dynCall_fiiffi');
@@ -18268,46 +18242,30 @@ function assignWasmExports(wasmExports) {
   dynCall_fiffi = dynCalls['fiffi'] = createExportWrapper('dynCall_fiffi', 5);
   assert(typeof wasmExports['dynCall_iiiifi'] != 'undefined', 'missing Wasm export: dynCall_iiiifi');
   dynCall_iiiifi = dynCalls['iiiifi'] = createExportWrapper('dynCall_iiiifi', 6);
-  assert(typeof wasmExports['dynCall_iiiffi'] != 'undefined', 'missing Wasm export: dynCall_iiiffi');
-  dynCall_iiiffi = dynCalls['iiiffi'] = createExportWrapper('dynCall_iiiffi', 6);
-  assert(typeof wasmExports['dynCall_viiiifi'] != 'undefined', 'missing Wasm export: dynCall_viiiifi');
-  dynCall_viiiifi = dynCalls['viiiifi'] = createExportWrapper('dynCall_viiiifi', 7);
-  assert(typeof wasmExports['dynCall_fiiiii'] != 'undefined', 'missing Wasm export: dynCall_fiiiii');
-  dynCall_fiiiii = dynCalls['fiiiii'] = createExportWrapper('dynCall_fiiiii', 6);
-  assert(typeof wasmExports['dynCall_vifii'] != 'undefined', 'missing Wasm export: dynCall_vifii');
-  dynCall_vifii = dynCalls['vifii'] = createExportWrapper('dynCall_vifii', 5);
-  assert(typeof wasmExports['dynCall_iiiiiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiiiiiii');
-  dynCall_iiiiiiiiiiiiii = dynCalls['iiiiiiiiiiiiii'] = createExportWrapper('dynCall_iiiiiiiiiiiiii', 14);
+  assert(typeof wasmExports['dynCall_viiiiiiifiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiifiiiiii');
+  dynCall_viiiiiiifiiiiii = dynCalls['viiiiiiifiiiiii'] = createExportWrapper('dynCall_viiiiiiifiiiiii', 15);
+  assert(typeof wasmExports['dynCall_iiijii'] != 'undefined', 'missing Wasm export: dynCall_iiijii');
+  dynCall_iiijii = dynCalls['iiijii'] = createExportWrapper('dynCall_iiijii', 7);
+  assert(typeof wasmExports['dynCall_iiiifii'] != 'undefined', 'missing Wasm export: dynCall_iiiifii');
+  dynCall_iiiifii = dynCalls['iiiifii'] = createExportWrapper('dynCall_iiiifii', 7);
+  assert(typeof wasmExports['dynCall_iiifii'] != 'undefined', 'missing Wasm export: dynCall_iiifii');
+  dynCall_iiifii = dynCalls['iiifii'] = createExportWrapper('dynCall_iiifii', 6);
+  assert(typeof wasmExports['dynCall_viiiifii'] != 'undefined', 'missing Wasm export: dynCall_viiiifii');
+  dynCall_viiiifii = dynCalls['viiiifii'] = createExportWrapper('dynCall_viiiifii', 8);
+  assert(typeof wasmExports['dynCall_iiifiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiifiiiiiii');
+  dynCall_iiifiiiiiii = dynCalls['iiifiiiiiii'] = createExportWrapper('dynCall_iiifiiiiiii', 11);
+  assert(typeof wasmExports['dynCall_iiddi'] != 'undefined', 'missing Wasm export: dynCall_iiddi');
+  dynCall_iiddi = dynCalls['iiddi'] = createExportWrapper('dynCall_iiddi', 5);
+  assert(typeof wasmExports['dynCall_iijji'] != 'undefined', 'missing Wasm export: dynCall_iijji');
+  dynCall_iijji = dynCalls['iijji'] = createExportWrapper('dynCall_iijji', 7);
+  assert(typeof wasmExports['dynCall_fiffffi'] != 'undefined', 'missing Wasm export: dynCall_fiffffi');
+  dynCall_fiffffi = dynCalls['fiffffi'] = createExportWrapper('dynCall_fiffffi', 7);
+  assert(typeof wasmExports['dynCall_iiiiiffiffiiiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiffiffiiiiiiiiiiii');
+  dynCall_iiiiiffiffiiiiiiiiiiii = dynCalls['iiiiiffiffiiiiiiiiiiii'] = createExportWrapper('dynCall_iiiiiffiffiiiiiiiiiiii', 22);
+  assert(typeof wasmExports['dynCall_viiiiffiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiffiiifiiii');
+  dynCall_viiiiffiiifiiii = dynCalls['viiiiffiiifiiii'] = createExportWrapper('dynCall_viiiiffiiifiiii', 15);
   assert(typeof wasmExports['dynCall_di'] != 'undefined', 'missing Wasm export: dynCall_di');
   dynCall_di = dynCalls['di'] = createExportWrapper('dynCall_di', 2);
-  assert(typeof wasmExports['dynCall_viiiji'] != 'undefined', 'missing Wasm export: dynCall_viiiji');
-  dynCall_viiiji = dynCalls['viiiji'] = createExportWrapper('dynCall_viiiji', 7);
-  assert(typeof wasmExports['dynCall_viiffi'] != 'undefined', 'missing Wasm export: dynCall_viiffi');
-  dynCall_viiffi = dynCalls['viiffi'] = createExportWrapper('dynCall_viiffi', 6);
-  assert(typeof wasmExports['dynCall_viidiji'] != 'undefined', 'missing Wasm export: dynCall_viidiji');
-  dynCall_viidiji = dynCalls['viidiji'] = createExportWrapper('dynCall_viidiji', 8);
-  assert(typeof wasmExports['dynCall_viidjii'] != 'undefined', 'missing Wasm export: dynCall_viidjii');
-  dynCall_viidjii = dynCalls['viidjii'] = createExportWrapper('dynCall_viidjii', 8);
-  assert(typeof wasmExports['dynCall_jijii'] != 'undefined', 'missing Wasm export: dynCall_jijii');
-  dynCall_jijii = dynCalls['jijii'] = createExportWrapper('dynCall_jijii', 6);
-  assert(typeof wasmExports['dynCall_iiiiiiiiiji'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiiji');
-  dynCall_iiiiiiiiiji = dynCalls['iiiiiiiiiji'] = createExportWrapper('dynCall_iiiiiiiiiji', 12);
-  assert(typeof wasmExports['dynCall_vji'] != 'undefined', 'missing Wasm export: dynCall_vji');
-  dynCall_vji = dynCalls['vji'] = createExportWrapper('dynCall_vji', 4);
-  assert(typeof wasmExports['dynCall_diiii'] != 'undefined', 'missing Wasm export: dynCall_diiii');
-  dynCall_diiii = dynCalls['diiii'] = createExportWrapper('dynCall_diiii', 5);
-  assert(typeof wasmExports['dynCall_iiidii'] != 'undefined', 'missing Wasm export: dynCall_iiidii');
-  dynCall_iiidii = dynCalls['iiidii'] = createExportWrapper('dynCall_iiidii', 6);
-  assert(typeof wasmExports['dynCall_jiijii'] != 'undefined', 'missing Wasm export: dynCall_jiijii');
-  dynCall_jiijii = dynCalls['jiijii'] = createExportWrapper('dynCall_jiijii', 7);
-  assert(typeof wasmExports['dynCall_viijiii'] != 'undefined', 'missing Wasm export: dynCall_viijiii');
-  dynCall_viijiii = dynCalls['viijiii'] = createExportWrapper('dynCall_viijiii', 8);
-  assert(typeof wasmExports['dynCall_viiijiii'] != 'undefined', 'missing Wasm export: dynCall_viiijiii');
-  dynCall_viiijiii = dynCalls['viiijiii'] = createExportWrapper('dynCall_viiijiii', 9);
-  assert(typeof wasmExports['dynCall_jiiji'] != 'undefined', 'missing Wasm export: dynCall_jiiji');
-  dynCall_jiiji = dynCalls['jiiji'] = createExportWrapper('dynCall_jiiji', 6);
-  assert(typeof wasmExports['dynCall_jiiijii'] != 'undefined', 'missing Wasm export: dynCall_jiiijii');
-  dynCall_jiiijii = dynCalls['jiiijii'] = createExportWrapper('dynCall_jiiijii', 8);
   assert(typeof wasmExports['dynCall_viiiidi'] != 'undefined', 'missing Wasm export: dynCall_viiiidi');
   dynCall_viiiidi = dynCalls['viiiidi'] = createExportWrapper('dynCall_viiiidi', 7);
   assert(typeof wasmExports['dynCall_iiiiiiidii'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiidii');
@@ -18324,18 +18282,44 @@ function assignWasmExports(wasmExports) {
   dynCall_viiiifiiii = dynCalls['viiiifiiii'] = createExportWrapper('dynCall_viiiifiiii', 10);
   assert(typeof wasmExports['dynCall_viiiiifiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiifiiii');
   dynCall_viiiiifiiii = dynCalls['viiiiifiiii'] = createExportWrapper('dynCall_viiiiifiiii', 11);
+  assert(typeof wasmExports['dynCall_jiijii'] != 'undefined', 'missing Wasm export: dynCall_jiijii');
+  dynCall_jiijii = dynCalls['jiijii'] = createExportWrapper('dynCall_jiijii', 7);
+  assert(typeof wasmExports['dynCall_viijiii'] != 'undefined', 'missing Wasm export: dynCall_viijiii');
+  dynCall_viijiii = dynCalls['viijiii'] = createExportWrapper('dynCall_viijiii', 8);
+  assert(typeof wasmExports['dynCall_viiijiii'] != 'undefined', 'missing Wasm export: dynCall_viiijiii');
+  dynCall_viiijiii = dynCalls['viiijiii'] = createExportWrapper('dynCall_viiijiii', 9);
+  assert(typeof wasmExports['dynCall_jiiji'] != 'undefined', 'missing Wasm export: dynCall_jiiji');
+  dynCall_jiiji = dynCalls['jiiji'] = createExportWrapper('dynCall_jiiji', 6);
+  assert(typeof wasmExports['dynCall_jiiijii'] != 'undefined', 'missing Wasm export: dynCall_jiiijii');
+  dynCall_jiiijii = dynCalls['jiiijii'] = createExportWrapper('dynCall_jiiijii', 8);
+  assert(typeof wasmExports['dynCall_iiiiiiiiiji'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiiiiji');
+  dynCall_iiiiiiiiiji = dynCalls['iiiiiiiiiji'] = createExportWrapper('dynCall_iiiiiiiiiji', 12);
+  assert(typeof wasmExports['dynCall_vji'] != 'undefined', 'missing Wasm export: dynCall_vji');
+  dynCall_vji = dynCalls['vji'] = createExportWrapper('dynCall_vji', 4);
+  assert(typeof wasmExports['dynCall_jjji'] != 'undefined', 'missing Wasm export: dynCall_jjji');
+  dynCall_jjji = dynCalls['jjji'] = createExportWrapper('dynCall_jjji', 6);
+  assert(typeof wasmExports['dynCall_jiiiii'] != 'undefined', 'missing Wasm export: dynCall_jiiiii');
+  dynCall_jiiiii = dynCalls['jiiiii'] = createExportWrapper('dynCall_jiiiii', 6);
   assert(typeof wasmExports['dynCall_diiiii'] != 'undefined', 'missing Wasm export: dynCall_diiiii');
   dynCall_diiiii = dynCalls['diiiii'] = createExportWrapper('dynCall_diiiii', 6);
-  assert(typeof wasmExports['dynCall_vijiii'] != 'undefined', 'missing Wasm export: dynCall_vijiii');
-  dynCall_vijiii = dynCalls['vijiii'] = createExportWrapper('dynCall_vijiii', 7);
+  assert(typeof wasmExports['dynCall_diiii'] != 'undefined', 'missing Wasm export: dynCall_diiii');
+  dynCall_diiii = dynCalls['diiii'] = createExportWrapper('dynCall_diiii', 5);
+  assert(typeof wasmExports['dynCall_iiidii'] != 'undefined', 'missing Wasm export: dynCall_iiidii');
+  dynCall_iiidii = dynCalls['iiidii'] = createExportWrapper('dynCall_iiidii', 6);
+  assert(typeof wasmExports['dynCall_jijii'] != 'undefined', 'missing Wasm export: dynCall_jijii');
+  dynCall_jijii = dynCalls['jijii'] = createExportWrapper('dynCall_jijii', 6);
   assert(typeof wasmExports['dynCall_ijji'] != 'undefined', 'missing Wasm export: dynCall_ijji');
   dynCall_ijji = dynCalls['ijji'] = createExportWrapper('dynCall_ijji', 6);
+  assert(typeof wasmExports['dynCall_iijii'] != 'undefined', 'missing Wasm export: dynCall_iijii');
+  dynCall_iijii = dynCalls['iijii'] = createExportWrapper('dynCall_iijii', 6);
+  assert(typeof wasmExports['dynCall_vijiii'] != 'undefined', 'missing Wasm export: dynCall_vijiii');
+  dynCall_vijiii = dynCalls['vijiii'] = createExportWrapper('dynCall_vijiii', 7);
   assert(typeof wasmExports['dynCall_vjjjiiii'] != 'undefined', 'missing Wasm export: dynCall_vjjjiiii');
   dynCall_vjjjiiii = dynCalls['vjjjiiii'] = createExportWrapper('dynCall_vjjjiiii', 11);
   assert(typeof wasmExports['dynCall_vjiiiii'] != 'undefined', 'missing Wasm export: dynCall_vjiiiii');
   dynCall_vjiiiii = dynCalls['vjiiiii'] = createExportWrapper('dynCall_vjiiiii', 8);
-  assert(typeof wasmExports['dynCall_iijii'] != 'undefined', 'missing Wasm export: dynCall_iijii');
-  dynCall_iijii = dynCalls['iijii'] = createExportWrapper('dynCall_iijii', 6);
+  assert(typeof wasmExports['dynCall_viffiiiii'] != 'undefined', 'missing Wasm export: dynCall_viffiiiii');
+  dynCall_viffiiiii = dynCalls['viffiiiii'] = createExportWrapper('dynCall_viffiiiii', 9);
   assert(typeof wasmExports['dynCall_iiffii'] != 'undefined', 'missing Wasm export: dynCall_iiffii');
   dynCall_iiffii = dynCalls['iiffii'] = createExportWrapper('dynCall_iiffii', 6);
   assert(typeof wasmExports['dynCall_iiifiii'] != 'undefined', 'missing Wasm export: dynCall_iiifiii');
@@ -18356,28 +18340,14 @@ function assignWasmExports(wasmExports) {
   dynCall_iiiffiii = dynCalls['iiiffiii'] = createExportWrapper('dynCall_iiiffiii', 8);
   assert(typeof wasmExports['dynCall_iiiiifii'] != 'undefined', 'missing Wasm export: dynCall_iiiiifii');
   dynCall_iiiiifii = dynCalls['iiiiifii'] = createExportWrapper('dynCall_iiiiifii', 8);
-  assert(typeof wasmExports['dynCall_iiifffffii'] != 'undefined', 'missing Wasm export: dynCall_iiifffffii');
-  dynCall_iiifffffii = dynCalls['iiifffffii'] = createExportWrapper('dynCall_iiifffffii', 10);
-  assert(typeof wasmExports['dynCall_jji'] != 'undefined', 'missing Wasm export: dynCall_jji');
-  dynCall_jji = dynCalls['jji'] = createExportWrapper('dynCall_jji', 4);
-  assert(typeof wasmExports['dynCall_viffiii'] != 'undefined', 'missing Wasm export: dynCall_viffiii');
-  dynCall_viffiii = dynCalls['viffiii'] = createExportWrapper('dynCall_viffiii', 7);
   assert(typeof wasmExports['dynCall_ijiiiii'] != 'undefined', 'missing Wasm export: dynCall_ijiiiii');
   dynCall_ijiiiii = dynCalls['ijiiiii'] = createExportWrapper('dynCall_ijiiiii', 8);
   assert(typeof wasmExports['dynCall_iijiiii'] != 'undefined', 'missing Wasm export: dynCall_iijiiii');
   dynCall_iijiiii = dynCalls['iijiiii'] = createExportWrapper('dynCall_iijiiii', 8);
-  assert(typeof wasmExports['dynCall_viiiiijijii'] != 'undefined', 'missing Wasm export: dynCall_viiiiijijii');
-  dynCall_viiiiijijii = dynCalls['viiiiijijii'] = createExportWrapper('dynCall_viiiiijijii', 13);
-  assert(typeof wasmExports['dynCall_viiijii'] != 'undefined', 'missing Wasm export: dynCall_viiijii');
-  dynCall_viiijii = dynCalls['viiijii'] = createExportWrapper('dynCall_viiijii', 8);
-  assert(typeof wasmExports['dynCall_viiiiiijijii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiijijii');
-  dynCall_viiiiiijijii = dynCalls['viiiiiijijii'] = createExportWrapper('dynCall_viiiiiijijii', 14);
-  assert(typeof wasmExports['dynCall_viijji'] != 'undefined', 'missing Wasm export: dynCall_viijji');
-  dynCall_viijji = dynCalls['viijji'] = createExportWrapper('dynCall_viijji', 8);
-  assert(typeof wasmExports['dynCall_vijji'] != 'undefined', 'missing Wasm export: dynCall_vijji');
-  dynCall_vijji = dynCalls['vijji'] = createExportWrapper('dynCall_vijji', 7);
-  assert(typeof wasmExports['dynCall_vijiji'] != 'undefined', 'missing Wasm export: dynCall_vijiji');
-  dynCall_vijiji = dynCalls['vijiji'] = createExportWrapper('dynCall_vijiji', 8);
+  assert(typeof wasmExports['dynCall_jji'] != 'undefined', 'missing Wasm export: dynCall_jji');
+  dynCall_jji = dynCalls['jji'] = createExportWrapper('dynCall_jji', 4);
+  assert(typeof wasmExports['dynCall_viffiii'] != 'undefined', 'missing Wasm export: dynCall_viffiii');
+  dynCall_viffiii = dynCalls['viffiii'] = createExportWrapper('dynCall_viffiii', 7);
   assert(typeof wasmExports['dynCall_iiffffiii'] != 'undefined', 'missing Wasm export: dynCall_iiffffiii');
   dynCall_iiffffiii = dynCalls['iiffffiii'] = createExportWrapper('dynCall_iiffffiii', 9);
   assert(typeof wasmExports['dynCall_iiidfi'] != 'undefined', 'missing Wasm export: dynCall_iiidfi');
@@ -18520,6 +18490,8 @@ function assignWasmExports(wasmExports) {
   dynCall_iiiiji = dynCalls['iiiiji'] = createExportWrapper('dynCall_iiiiji', 7);
   assert(typeof wasmExports['dynCall_iiiiiji'] != 'undefined', 'missing Wasm export: dynCall_iiiiiji');
   dynCall_iiiiiji = dynCalls['iiiiiji'] = createExportWrapper('dynCall_iiiiiji', 8);
+  assert(typeof wasmExports['dynCall_viiijii'] != 'undefined', 'missing Wasm export: dynCall_viiijii');
+  dynCall_viiijii = dynCalls['viiijii'] = createExportWrapper('dynCall_viiijii', 8);
   assert(typeof wasmExports['dynCall_ifiiifiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_ifiiifiiiiiii');
   dynCall_ifiiifiiiiiii = dynCalls['ifiiifiiiiiii'] = createExportWrapper('dynCall_ifiiifiiiiiii', 13);
   assert(typeof wasmExports['dynCall_jjii'] != 'undefined', 'missing Wasm export: dynCall_jjii');
@@ -18550,6 +18522,8 @@ function assignWasmExports(wasmExports) {
   dynCall_iiiifiiiii = dynCalls['iiiifiiiii'] = createExportWrapper('dynCall_iiiifiiiii', 10);
   assert(typeof wasmExports['dynCall_iffffi'] != 'undefined', 'missing Wasm export: dynCall_iffffi');
   dynCall_iffffi = dynCalls['iffffi'] = createExportWrapper('dynCall_iffffi', 6);
+  assert(typeof wasmExports['dynCall_vijji'] != 'undefined', 'missing Wasm export: dynCall_vijji');
+  dynCall_vijji = dynCalls['vijji'] = createExportWrapper('dynCall_vijji', 7);
   assert(typeof wasmExports['dynCall_viiiiiiiiiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiiiiiii');
   dynCall_viiiiiiiiiiii = dynCalls['viiiiiiiiiiii'] = createExportWrapper('dynCall_viiiiiiiiiiii', 13);
   assert(typeof wasmExports['dynCall_vfffi'] != 'undefined', 'missing Wasm export: dynCall_vfffi');
@@ -18572,8 +18546,6 @@ function assignWasmExports(wasmExports) {
   dynCall_vfii = dynCalls['vfii'] = createExportWrapper('dynCall_vfii', 4);
   assert(typeof wasmExports['dynCall_vjiiii'] != 'undefined', 'missing Wasm export: dynCall_vjiiii');
   dynCall_vjiiii = dynCalls['vjiiii'] = createExportWrapper('dynCall_vjiiii', 7);
-  assert(typeof wasmExports['dynCall_viifffi'] != 'undefined', 'missing Wasm export: dynCall_viifffi');
-  dynCall_viifffi = dynCalls['viifffi'] = createExportWrapper('dynCall_viifffi', 7);
   assert(typeof wasmExports['dynCall_vijiiii'] != 'undefined', 'missing Wasm export: dynCall_vijiiii');
   dynCall_vijiiii = dynCalls['vijiiii'] = createExportWrapper('dynCall_vijiiii', 8);
   assert(typeof wasmExports['dynCall_viiijiiii'] != 'undefined', 'missing Wasm export: dynCall_viiijiiii');
@@ -18644,6 +18616,8 @@ function assignWasmExports(wasmExports) {
   dynCall_iiffiiiiiiiiii = dynCalls['iiffiiiiiiiiii'] = createExportWrapper('dynCall_iiffiiiiiiiiii', 14);
   assert(typeof wasmExports['dynCall_viiiiiiiiiiffiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiiiiiffiii');
   dynCall_viiiiiiiiiiffiii = dynCalls['viiiiiiiiiiffiii'] = createExportWrapper('dynCall_viiiiiiiiiiffiii', 16);
+  assert(typeof wasmExports['dynCall_viijji'] != 'undefined', 'missing Wasm export: dynCall_viijji');
+  dynCall_viijji = dynCalls['viijji'] = createExportWrapper('dynCall_viijji', 8);
   assert(typeof wasmExports['dynCall_viiiiiiifffiii'] != 'undefined', 'missing Wasm export: dynCall_viiiiiiifffiii');
   dynCall_viiiiiiifffiii = dynCalls['viiiiiiifffiii'] = createExportWrapper('dynCall_viiiiiiifffiii', 14);
   assert(typeof wasmExports['dynCall_fffffffi'] != 'undefined', 'missing Wasm export: dynCall_fffffffi');
@@ -18726,6 +18700,8 @@ function assignWasmExports(wasmExports) {
   dynCall_viififfi = dynCalls['viififfi'] = createExportWrapper('dynCall_viififfi', 8);
   assert(typeof wasmExports['dynCall_viififi'] != 'undefined', 'missing Wasm export: dynCall_viififi');
   dynCall_viififi = dynCalls['viififi'] = createExportWrapper('dynCall_viififi', 7);
+  assert(typeof wasmExports['dynCall_viifffi'] != 'undefined', 'missing Wasm export: dynCall_viifffi');
+  dynCall_viifffi = dynCalls['viifffi'] = createExportWrapper('dynCall_viifffi', 7);
   assert(typeof wasmExports['dynCall_iijjijii'] != 'undefined', 'missing Wasm export: dynCall_iijjijii');
   dynCall_iijjijii = dynCalls['iijjijii'] = createExportWrapper('dynCall_iijjijii', 11);
   assert(typeof wasmExports['dynCall_iijjiijii'] != 'undefined', 'missing Wasm export: dynCall_iijjiijii');
@@ -18952,6 +18928,8 @@ function assignWasmExports(wasmExports) {
   dynCall_didi = dynCalls['didi'] = createExportWrapper('dynCall_didi', 4);
   assert(typeof wasmExports['dynCall_viijijiii'] != 'undefined', 'missing Wasm export: dynCall_viijijiii');
   dynCall_viijijiii = dynCalls['viijijiii'] = createExportWrapper('dynCall_viijijiii', 11);
+  assert(typeof wasmExports['dynCall_vijiji'] != 'undefined', 'missing Wasm export: dynCall_vijiji');
+  dynCall_vijiji = dynCalls['vijiji'] = createExportWrapper('dynCall_vijiji', 8);
   assert(typeof wasmExports['dynCall_viijiijiii'] != 'undefined', 'missing Wasm export: dynCall_viijiijiii');
   dynCall_viijiijiii = dynCalls['viijiijiii'] = createExportWrapper('dynCall_viijiijiii', 12);
   assert(typeof wasmExports['dynCall_viiiijiiii'] != 'undefined', 'missing Wasm export: dynCall_viiiijiiii');
@@ -18990,8 +18968,6 @@ function assignWasmExports(wasmExports) {
   dynCall_iijfi = dynCalls['iijfi'] = createExportWrapper('dynCall_iijfi', 6);
   assert(typeof wasmExports['dynCall_iijjfi'] != 'undefined', 'missing Wasm export: dynCall_iijjfi');
   dynCall_iijjfi = dynCalls['iijjfi'] = createExportWrapper('dynCall_iijjfi', 8);
-  assert(typeof wasmExports['dynCall_viiiddi'] != 'undefined', 'missing Wasm export: dynCall_viiiddi');
-  dynCall_viiiddi = dynCalls['viiiddi'] = createExportWrapper('dynCall_viiiddi', 7);
   assert(typeof wasmExports['dynCall_iiiiiiffidi'] != 'undefined', 'missing Wasm export: dynCall_iiiiiiffidi');
   dynCall_iiiiiiffidi = dynCalls['iiiiiiffidi'] = createExportWrapper('dynCall_iiiiiiffidi', 11);
   assert(typeof wasmExports['dynCall_iiiiffffidi'] != 'undefined', 'missing Wasm export: dynCall_iiiiffffidi');
@@ -19100,8 +19076,6 @@ function assignWasmExports(wasmExports) {
   dynCall_vijjjii = dynCalls['vijjjii'] = createExportWrapper('dynCall_vijjjii', 10);
   assert(typeof wasmExports['dynCall_viid'] != 'undefined', 'missing Wasm export: dynCall_viid');
   dynCall_viid = dynCalls['viid'] = createExportWrapper('dynCall_viid', 4);
-  assert(typeof wasmExports['dynCall_viiif'] != 'undefined', 'missing Wasm export: dynCall_viiif');
-  dynCall_viiif = dynCalls['viiif'] = createExportWrapper('dynCall_viiif', 5);
   assert(typeof wasmExports['dynCall_ffjfj'] != 'undefined', 'missing Wasm export: dynCall_ffjfj');
   dynCall_ffjfj = dynCalls['ffjfj'] = createExportWrapper('dynCall_ffjfj', 7);
   assert(typeof wasmExports['dynCall_fiiiif'] != 'undefined', 'missing Wasm export: dynCall_fiiiif');
@@ -19148,6 +19122,8 @@ function assignWasmExports(wasmExports) {
   dynCall_viijijj = dynCalls['viijijj'] = createExportWrapper('dynCall_viijijj', 10);
   assert(typeof wasmExports['dynCall_viiiij'] != 'undefined', 'missing Wasm export: dynCall_viiiij');
   dynCall_viiiij = dynCalls['viiiij'] = createExportWrapper('dynCall_viiiij', 7);
+  assert(typeof wasmExports['dynCall_viiif'] != 'undefined', 'missing Wasm export: dynCall_viiif');
+  dynCall_viiif = dynCalls['viiif'] = createExportWrapper('dynCall_viiif', 5);
   assert(typeof wasmExports['dynCall_viffffffffffffiiii'] != 'undefined', 'missing Wasm export: dynCall_viffffffffffffiiii');
   dynCall_viffffffffffffiiii = dynCalls['viffffffffffffiiii'] = createExportWrapper('dynCall_viffffffffffffiiii', 18);
   assert(typeof wasmExports['dynCall_iif'] != 'undefined', 'missing Wasm export: dynCall_iif');
@@ -19425,8 +19401,6 @@ var wasmImports = {
   Telegram_EnsureWebAppScript: _Telegram_EnsureWebAppScript,
   /** @export */
   Telegram_GetUserData: _Telegram_GetUserData,
-  /** @export */
-  Telegram_GetUserId: _Telegram_GetUserId,
   /** @export */
   __assert_fail: ___assert_fail,
   /** @export */
@@ -20607,65 +20581,10 @@ function invoke_viiiii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_iiiiiiffiiiiiiiiiffffiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23) {
+function invoke_viiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiffiiiiiiiiiffffiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viffi(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    dynCall_viffi(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_fifi(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return dynCall_fifi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_vifi(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    dynCall_vifi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_fii(index,a1,a2) {
-  var sp = stackSave();
-  try {
-    return dynCall_fii(index,a1,a2);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viifi(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    dynCall_viifi(index,a1,a2,a3,a4);
+    dynCall_viiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20677,17 +20596,6 @@ function invoke_iiiidii(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
     return dynCall_iiiidii(index,a1,a2,a3,a4,a5,a6);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viifiii(index,a1,a2,a3,a4,a5,a6) {
-  var sp = stackSave();
-  try {
-    dynCall_viifiii(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20728,6 +20636,116 @@ function invoke_viidi(index,a1,a2,a3,a4) {
   }
 }
 
+function invoke_iiiiiiffiiiiiiiiiffffiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiiffiiiiiiiiiffffiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_diidi(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    return dynCall_diidi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_fii(index,a1,a2) {
+  var sp = stackSave();
+  try {
+    return dynCall_fii(index,a1,a2);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_fiifi(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    return dynCall_fiifi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_fi(index,a1) {
+  var sp = stackSave();
+  try {
+    return dynCall_fi(index,a1);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiffi(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    dynCall_viiffi(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiiiifddfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiiiifddfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiiiifiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiiiifiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiiiiffffiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiiiiffffiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_viiffffi(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
@@ -20739,10 +20757,32 @@ function invoke_viiffffi(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
+function invoke_viifi(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    dynCall_viifi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_ffi(index,a1,a2) {
   var sp = stackSave();
   try {
     return dynCall_ffi(index,a1,a2);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vifi(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    dynCall_vifi(index,a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20794,17 +20834,6 @@ function invoke_viiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13)
   }
 }
 
-function invoke_fi(index,a1) {
-  var sp = stackSave();
-  try {
-    return dynCall_fi(index,a1);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_iiiiifi(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
@@ -20849,10 +20878,10 @@ function invoke_viiiiiiiiiiiffiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a1
   }
 }
 
-function invoke_iiiiiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
+function invoke_viffi(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
+    dynCall_viffi(index,a1,a2,a3,a4);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20860,10 +20889,10 @@ function invoke_iiiiiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
   }
 }
 
-function invoke_iiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+function invoke_ddiii(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
-    return dynCall_iiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
+    return dynCall_ddiii(index,a1,a2,a3,a4);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20871,10 +20900,32 @@ function invoke_iiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
   }
 }
 
-function invoke_viiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
+function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
   var sp = stackSave();
   try {
-    dynCall_viiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
+    return dynCall_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viifiii(index,a1,a2,a3,a4,a5,a6) {
+  var sp = stackSave();
+  try {
+    dynCall_viifiii(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20893,10 +20944,10 @@ function invoke_iiffi(index,a1,a2,a3,a4) {
   }
 }
 
-function invoke_viiifii(index,a1,a2,a3,a4,a5,a6) {
+function invoke_viiiifi(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
-    dynCall_viiifii(index,a1,a2,a3,a4,a5,a6);
+    dynCall_viiiifi(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -20904,120 +20955,10 @@ function invoke_viiifii(index,a1,a2,a3,a4,a5,a6) {
   }
 }
 
-function invoke_dddi(index,a1,a2,a3) {
+function invoke_iifi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return dynCall_dddi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_fffi(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return dynCall_fffi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viffiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
-  var sp = stackSave();
-  try {
-    dynCall_viffiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiffiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiffiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_diidi(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    return dynCall_diidi(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_fiifi(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    return dynCall_fiifi(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiiiifiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiiiifiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiiiifddfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiiiifddfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiiiiffffiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiiiiffffiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiidi(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    dynCall_viiidi(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiiiiffiffiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiiiiffiffiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21);
+    return dynCall_iifi(index,a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21036,10 +20977,54 @@ function invoke_fiiiii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_viiiiffiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
+function invoke_iiifi(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
-    dynCall_viiiiffiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
+    return dynCall_iiifi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vifii(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    dynCall_vifii(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vifiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
+  var sp = stackSave();
+  try {
+    dynCall_vifiiiii(index,a1,a2,a3,a4,a5,a6,a7);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viffffffi(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    dynCall_viffffffi(index,a1,a2,a3,a4,a5,a6,a7,a8);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiifii(index,a1,a2,a3,a4,a5,a6) {
+  var sp = stackSave();
+  try {
+    dynCall_viiifii(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21091,10 +21076,10 @@ function invoke_vfi(index,a1,a2) {
   }
 }
 
-function invoke_iiifiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
+function invoke_iiiiiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
   var sp = stackSave();
   try {
-    return dynCall_iiifiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
+    return dynCall_iiiiiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21102,10 +21087,10 @@ function invoke_iiifiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
   }
 }
 
-function invoke_ddiii(index,a1,a2,a3,a4) {
+function invoke_iiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
   var sp = stackSave();
   try {
-    return dynCall_ddiii(index,a1,a2,a3,a4);
+    return dynCall_iiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21113,10 +21098,10 @@ function invoke_ddiii(index,a1,a2,a3,a4) {
   }
 }
 
-function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
+function invoke_dddi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
+    return dynCall_dddi(index,a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21124,65 +21109,10 @@ function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
   }
 }
 
-function invoke_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+function invoke_fffi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_vifiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
-  var sp = stackSave();
-  try {
-    dynCall_vifiiiii(index,a1,a2,a3,a4,a5,a6,a7);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viffffffi(index,a1,a2,a3,a4,a5,a6,a7,a8) {
-  var sp = stackSave();
-  try {
-    dynCall_viffffffi(index,a1,a2,a3,a4,a5,a6,a7,a8);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiiiiifiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiiiiifiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiifi(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiifi(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiiidi(index,a1,a2,a3,a4,a5,a6) {
-  var sp = stackSave();
-  try {
-    dynCall_viiiidi(index,a1,a2,a3,a4,a5,a6);
+    return dynCall_fffi(index,a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21234,10 +21164,10 @@ function invoke_fiiffi(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_viiiifi(index,a1,a2,a3,a4,a5,a6) {
+function invoke_viiiiiiifiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
   var sp = stackSave();
   try {
-    dynCall_viiiifi(index,a1,a2,a3,a4,a5,a6);
+    dynCall_viiiiiiifiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21245,21 +21175,10 @@ function invoke_viiiifi(index,a1,a2,a3,a4,a5,a6) {
   }
 }
 
-function invoke_iifi(index,a1,a2,a3) {
+function invoke_iiifiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
   var sp = stackSave();
   try {
-    return dynCall_iifi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_vifii(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    dynCall_vifii(index,a1,a2,a3,a4);
+    return dynCall_iiifiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21278,10 +21197,43 @@ function invoke_iiiifii(index,a1,a2,a3,a4,a5,a6) {
   }
 }
 
-function invoke_iiiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13) {
+function invoke_viiidi(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13);
+    dynCall_viiidi(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_fifi(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    return dynCall_fifi(index,a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiffiffiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiffiffiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiiffiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiiffiiifiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21311,10 +21263,10 @@ function invoke_di(index,a1) {
   }
 }
 
-function invoke_iiifii(index,a1,a2,a3,a4,a5) {
+function invoke_viiiidi(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
-    return dynCall_iiifii(index,a1,a2,a3,a4,a5);
+    dynCall_viiiidi(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21366,10 +21318,10 @@ function invoke_viiiiidi(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
-function invoke_viiffi(index,a1,a2,a3,a4,a5) {
+function invoke_iiifii(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    dynCall_viiffi(index,a1,a2,a3,a4,a5);
+    return dynCall_iiifii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21403,6 +21355,28 @@ function invoke_diiiii(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
     return dynCall_diiiii(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viffiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    dynCall_viffiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiffiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiffiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21498,17 +21472,6 @@ function invoke_j(index) {
   }
 }
 
-function invoke_iji(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return dynCall_iji(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_jiii(index,a1,a2,a3) {
   var sp = stackSave();
   try {
@@ -21520,10 +21483,10 @@ function invoke_jiii(index,a1,a2,a3) {
   }
 }
 
-function invoke_iiiijii(index,a1,a2,a3,a4,a5,a6,a7) {
+function invoke_iji(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    return dynCall_iiiijii(index,a1,a2,a3,a4,a5,a6,a7);
+    return dynCall_iji(index,a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21542,10 +21505,10 @@ function invoke_jjji(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
+function invoke_iiiijii(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
-    return dynCall_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
+    return dynCall_iiiijii(index,a1,a2,a3,a4,a5,a6,a7);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21553,10 +21516,21 @@ function invoke_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
   }
 }
 
-function invoke_jiiiii(index,a1,a2,a3,a4,a5) {
+function invoke_viji(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
-    return dynCall_jiiiii(index,a1,a2,a3,a4,a5);
+    dynCall_viji(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiji(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    dynCall_viiji(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21586,10 +21560,10 @@ function invoke_vijii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_viji(index,a1,a2,a3,a4) {
+function invoke_jiiji(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    dynCall_viji(index,a1,a2,a3,a4);
+    return dynCall_jiiji(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21608,43 +21582,10 @@ function invoke_iiji(index,a1,a2,a3,a4) {
   }
 }
 
-function invoke_viiji(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    dynCall_viiji(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_jiiji(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    return dynCall_jiiji(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_viiiiiifjjfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) {
   var sp = stackSave();
   try {
     dynCall_viiiiiifjjfiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iijiiii(index,a1,a2,a3,a4,a5,a6,a7) {
-  var sp = stackSave();
-  try {
-    return dynCall_iijiiii(index,a1,a2,a3,a4,a5,a6,a7);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21663,10 +21604,10 @@ function invoke_iiijii(index,a1,a2,a3,a4,a5,a6) {
   }
 }
 
-function invoke_jijii(index,a1,a2,a3,a4,a5) {
+function invoke_viijiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
   var sp = stackSave();
   try {
-    return dynCall_jijii(index,a1,a2,a3,a4,a5);
+    dynCall_viijiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21674,10 +21615,10 @@ function invoke_jijii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
+function invoke_iijiiii(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
-    return dynCall_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
+    return dynCall_iijiiii(index,a1,a2,a3,a4,a5,a6,a7);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21685,10 +21626,21 @@ function invoke_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
   }
 }
 
-function invoke_vji(index,a1,a2,a3) {
+function invoke_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
   var sp = stackSave();
   try {
-    dynCall_vji(index,a1,a2,a3);
+    return dynCall_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viidiji(index,a1,a2,a3,a4,a5,a6,a7) {
+  var sp = stackSave();
+  try {
+    dynCall_viidiji(index,a1,a2,a3,a4,a5,a6,a7);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21729,10 +21681,10 @@ function invoke_viiijiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
   }
 }
 
-function invoke_viidiji(index,a1,a2,a3,a4,a5,a6,a7) {
+function invoke_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
   var sp = stackSave();
   try {
-    dynCall_viidiji(index,a1,a2,a3,a4,a5,a6,a7);
+    return dynCall_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21740,10 +21692,32 @@ function invoke_viidiji(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
-function invoke_viijiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+function invoke_vji(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    dynCall_viijiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
+    dynCall_vji(index,a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_jiiiii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return dynCall_jiiiii(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_jijii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return dynCall_jijii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21755,6 +21729,39 @@ function invoke_ijji(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
     return dynCall_ijji(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_jiji(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    return dynCall_jiji(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iijji(index,a1,a2,a3,a4,a5,a6) {
+  var sp = stackSave();
+  try {
+    return dynCall_iijji(index,a1,a2,a3,a4,a5,a6);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iijii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return dynCall_iijii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -21788,39 +21795,6 @@ function invoke_vjiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
     dynCall_vjiiiii(index,a1,a2,a3,a4,a5,a6,a7);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iijii(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    return dynCall_iijii(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_jiji(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    return dynCall_jiji(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iijji(index,a1,a2,a3,a4,a5,a6) {
-  var sp = stackSave();
-  try {
-    return dynCall_iijji(index,a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
