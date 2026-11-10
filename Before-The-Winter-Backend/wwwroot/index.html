@@ -28,6 +28,8 @@
         var tg = window.Telegram && window.Telegram.WebApp;
         if (!tg) return;
 
+        var isPhone = tg.platform === "android" || tg.platform === "ios" || tg.platform === "android_x";
+        document.body.classList.toggle("phone", isPhone);
         var call = function (fn) { try { fn(); } catch (e) { console.warn(e); } };
 
         call(function () { tg.ready(); });
@@ -35,10 +37,21 @@
         call(function () { tg.expand(); });
         call(function () { tg.disableVerticalSwipes(); });
 
-        // Fullscreen on every platform: on desktop the Mini App otherwise opens in a narrow portrait window.
-        call(function () { tg.requestFullscreen(); });
-
-        call(function () { tg.unlockOrientation(); });
+        if (isPhone) {
+          call(function () { tg.requestFullscreen(); });
+          call(function () {
+            if (screen.orientation && screen.orientation.lock)
+              screen.orientation.lock("portrait").catch(function () {});
+          });
+          var lockPortrait = function () {
+            if (window.innerHeight >= window.innerWidth)
+              call(function () { tg.lockOrientation(); });
+          };
+          lockPortrait();
+          window.addEventListener("resize", lockPortrait);
+        } else {
+          call(function () { tg.unlockOrientation(); });
+        }
 
         tg.onEvent("viewportChanged", function () { call(function () { tg.expand(); }); });
       })();
