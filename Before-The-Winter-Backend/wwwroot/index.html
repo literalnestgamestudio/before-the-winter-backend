@@ -104,6 +104,14 @@
           } else {
             loadingContainer.style.display = "none";
           }
+        }).then((unityInstance) => {
+          var unlockMusic = function () {
+            unityInstance.SendMessage("Music", "UnlockAudio");
+            window.removeEventListener("touchstart", unlockMusic);
+            window.removeEventListener("mousedown", unlockMusic);
+          };
+          window.addEventListener("touchstart", unlockMusic);
+          window.addEventListener("mousedown", unlockMusic);
         }).catch((message) => {
           alert(message);
         });
