@@ -4,6 +4,8 @@ namespace Everything_Lost_Backend;
 
 internal sealed record ChatMessage(string UserId, string Message, long SentAtUnixSeconds);
 
+internal sealed record LeaderboardEntry(string? Username, long GlobalCoins);
+
 internal sealed partial class FirestoreService
 {
     private const int MaxStoredChatMessages = 100;
@@ -44,6 +46,18 @@ internal sealed partial class FirestoreService
         return snapshot.Exists && snapshot.ContainsField("telegramUsername")
             ? snapshot.GetValue<string>("telegramUsername")
             : null;
+    }
+
+    /// <returns>The users with the most globalCoins collected, best first. Users without globalCoins are not ranked.</returns>
+    public async Task<IReadOnlyList<LeaderboardEntry>> GetLeaderboardAsync(int limit, CancellationToken cancellationToken)
+    {
+        var snapshot = await db.Collection("Users").OrderByDescending("globalCoins").Limit(limit)
+            .GetSnapshotAsync(cancellationToken);
+        return snapshot.Documents
+            .Select(d => new LeaderboardEntry(
+                d.ContainsField("telegramUsername") ? d.GetValue<string>("telegramUsername") : null,
+                d.GetValue<long>("globalCoins")))
+            .ToList();
     }
 
     /// <returns>The latest messages, oldest first.</returns>

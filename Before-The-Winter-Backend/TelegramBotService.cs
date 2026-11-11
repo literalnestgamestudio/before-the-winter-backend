@@ -25,6 +25,7 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
     private const string BroadcastConfirmCallback = "broadcast_confirm";
     private const string BroadcastCancelCallback = "broadcast_cancel";
     private const long DefaultAdminId = 731475622;
+    private const int LeaderboardSize = 10;
 
     private long AdminId => configuration.GetValue("Telegram:AdminId", DefaultAdminId);
 
@@ -76,6 +77,11 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
                             await SendAdminKeyboardAsync(chat.Id, stoppingToken);
                         }
                     }
+                    else if (update.Message is { Text: { } text, Chat: var leaderboardChat }
+                             && (text == "/leaderboard" || text.StartsWith("/leaderboard@", StringComparison.Ordinal)))
+                    {
+                        await SendLeaderboardAsync(leaderboardChat.Id, stoppingToken);
+                    }
                     else if (update.CallbackQuery is { Data: FirestoreTestCallback } query)
                     {
                         await HandleFirestoreTestAsync(query, stoppingToken);
@@ -107,6 +113,39 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
                 await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
             }
         }
+    }
+
+    private async Task SendLeaderboardAsync(long chatId, CancellationToken cancellationToken)
+    {
+        string text;
+        try
+        {
+            if (firestore is null)
+            {
+                text = "Firebase is not configured.";
+            }
+            else
+            {
+                var top = await firestore.GetLeaderboardAsync(LeaderboardSize, cancellationToken);
+                string[] medals = { "🥇", "🥈", "🥉" };
+                text = top.Count == 0
+                    ? "🏆 Рейтинг поки порожній."
+                    : "🏆 Топ гравців за зібраними монетами:\n\n" + string.Join("\n", top.Select((entry, i) =>
+                    {
+                        var place = i < medals.Length ? medals[i] : $"{i + 1}.";
+                        var name = string.IsNullOrWhiteSpace(entry.Username) ? "Гравець" : "@" + entry.Username.TrimStart('@');
+                        return $"{place} {name} — {entry.GlobalCoins} 🪙";
+                    }));
+            }
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            logger.LogWarning(ex, "Leaderboard failed");
+            text = "Не вдалося завантажити рейтинг. Спробуй пізніше.";
+        }
+
+        using var send = await _httpClient.PostAsJsonAsync("sendMessage", new { chat_id = chatId, text }, cancellationToken);
+        send.EnsureSuccessStatusCode();
     }
 
     private async Task HandleFirestoreTestAsync(TelegramCallbackQuery query, CancellationToken cancellationToken)
