@@ -66,7 +66,6 @@ C:\Users\artab\AppData\Local\Temp\claude\e2b33cb8f149d1b7\4855a79b-a9a3-4bb0-a52
 C:\Users\artab\AppData\Local\Temp\claude\e2b33cb8f149d1b7\4855a79b-a9a3-4bb0-a521-179c1d7ec159\scratchpad\chk\Before-The-Winter-Backend.runtimeconfig.json
 C:\Users\artab\AppData\Local\Temp\claude\e2b33cb8f149d1b7\4855a79b-a9a3-4bb0-a521-179c1d7ec159\scratchpad\chk\Before-The-Winter-Backend.dll
 C:\Users\artab\AppData\Local\Temp\claude\e2b33cb8f149d1b7\4855a79b-a9a3-4bb0-a521-179c1d7ec159\scratchpad\chk\Before-The-Winter-Backend.pdb
-D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-8mo3m0tdkj-8mo3m0tdkj.gz
 D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\dl09zufvu1-{0}-trn82z03m3-trn82z03m3.gz
 D:\Work\Projects\before-the-winter-backend\build-check\device-login\appsettings.Development.json
 D:\Work\Projects\before-the-winter-backend\build-check\device-login\appsettings.json
@@ -86,3 +85,13 @@ D:\Work\Projects\before-the-winter-backend\build-check\lootbox-price\Before-The-
 D:\Work\Projects\before-the-winter-backend\build-check\lootbox-price\Before-The-Winter-Backend.runtimeconfig.json
 D:\Work\Projects\before-the-winter-backend\build-check\lootbox-price\Before-The-Winter-Backend.dll
 D:\Work\Projects\before-the-winter-backend\build-check\lootbox-price\Before-The-Winter-Backend.pdb
+D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-g40xzxsyyk-g40xzxsyyk.gz
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\appsettings.Development.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\appsettings.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Sources\Welcome_1080.png
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.staticwebassets.runtime.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.staticwebassets.endpoints.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.deps.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.runtimeconfig.json
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.dll
+D:\Work\Projects\before-the-winter-backend\build-check\tree-curve\Before-The-Winter-Backend.pdb

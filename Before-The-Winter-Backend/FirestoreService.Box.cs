@@ -106,7 +106,7 @@ internal sealed partial class FirestoreService
     public async Task<(long WateredTimesAmount, int Stage)> AdvanceTreeStageAsync(
         string userId, CancellationToken cancellationToken)
     {
-        long[] thresholds = { 0, 1, 2, 4, 6, 9, 14, 21, 32, 50 };
+        long[] thresholds = { 0, 2, 4, 7, 10, 14, 19, 26, 36, 50 };
         var doc = db.Collection("Users").Document(userId);
         return await db.RunTransactionAsync(async transaction =>
         {
