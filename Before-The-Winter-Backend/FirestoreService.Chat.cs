@@ -49,11 +49,15 @@ internal sealed partial class FirestoreService
     }
 
     /// <returns>The users with the most globalCoins collected, best first. Users without globalCoins are not ranked.</returns>
-    public async Task<IReadOnlyList<LeaderboardEntry>> GetLeaderboardAsync(int limit, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<LeaderboardEntry>> GetLeaderboardAsync(
+        int limit, IReadOnlyCollection<string> excludedUserIds, CancellationToken cancellationToken)
     {
-        var snapshot = await db.Collection("Users").OrderByDescending("globalCoins").Limit(limit)
-            .GetSnapshotAsync(cancellationToken);
+        // Over-fetch by the number of excluded users so the list still has `limit` entries after filtering.
+        var snapshot = await db.Collection("Users").OrderByDescending("globalCoins")
+            .Limit(limit + excludedUserIds.Count).GetSnapshotAsync(cancellationToken);
         return snapshot.Documents
+            .Where(d => !excludedUserIds.Contains(d.Id))
+            .Take(limit)
             .Select(d => new LeaderboardEntry(
                 d.ContainsField("telegramUsername") ? d.GetValue<string>("telegramUsername") : null,
                 d.GetValue<long>("globalCoins")))

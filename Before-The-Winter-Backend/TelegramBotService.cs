@@ -126,7 +126,8 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
             }
             else
             {
-                var top = await firestore.GetLeaderboardAsync(LeaderboardSize, cancellationToken);
+                var excluded = configuration.GetSection("Leaderboard:ExcludedUserIds").Get<string[]>() ?? [];
+                var top = await firestore.GetLeaderboardAsync(LeaderboardSize, excluded, cancellationToken);
                 string[] medals = { "🥇", "🥈", "🥉" };
                 text = top.Count == 0
                     ? "🏆 Рейтинг поки порожній."
