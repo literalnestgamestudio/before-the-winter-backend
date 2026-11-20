@@ -293,10 +293,10 @@ app.MapGet("/api/users/data/{userId}", async (string userId,
     return Results.Ok(await firestore.GetUserDataAsync(userId, ct));
 });
 
-app.MapGet("/api/avatars", async (string url, AvatarImageProxy avatarProxy,
+app.MapGet("/api/avatars", async (string url, string? avatarRefresh, AvatarImageProxy avatarProxy,
     HttpContext context, CancellationToken ct) =>
 {
-    var png = await avatarProxy.GetPngAsync(url, ct);
+    var png = await avatarProxy.GetPngAsync(url, avatarRefresh, ct);
     if (png == null) return Results.NotFound();
     context.Response.Headers.CacheControl = "public, max-age=86400";
     return Results.File(png, "image/png");

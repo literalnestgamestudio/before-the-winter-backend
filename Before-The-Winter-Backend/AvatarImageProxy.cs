@@ -11,12 +11,13 @@ internal sealed class AvatarImageProxy(HttpClient client, IMemoryCache cache, IL
     private const int MaxImageBytes = 2 * 1024 * 1024;
     private const int AvatarSize = 320;
 
-    public async Task<byte[]?> GetPngAsync(string url, CancellationToken cancellationToken)
+    public async Task<byte[]?> GetPngAsync(string url, string? avatarRefresh, CancellationToken cancellationToken)
     {
         if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || !IsAllowed(uri))
             return null;
 
-        if (cache.TryGetValue<byte[]>(url, out var cached))
+        var cacheKey = avatarRefresh is { Length: > 0 and <= 32 } ? $"{url}|{avatarRefresh}" : url;
+        if (cache.TryGetValue<byte[]>(cacheKey, out var cached))
             return cached;
 
         for (var redirects = 0; redirects < 3; redirects++)
@@ -76,7 +77,7 @@ internal sealed class AvatarImageProxy(HttpClient client, IMemoryCache cache, IL
                 }
 
                 if (png == null) return null;
-                cache.Set(url, png, TimeSpan.FromHours(24));
+                cache.Set(cacheKey, png, TimeSpan.FromHours(24));
                 return png;
             }
             catch (Exception exception)
@@ -91,5 +92,7 @@ internal sealed class AvatarImageProxy(HttpClient client, IMemoryCache cache, IL
 
     private static bool IsAllowed(Uri uri) =>
         uri.Scheme == Uri.UriSchemeHttps && uri.IsDefaultPort && uri.UserInfo.Length == 0 &&
-        (uri.Host == "t.me" || uri.Host == "telegram.org" || uri.Host.EndsWith(".telegram.org", StringComparison.Ordinal));
+        (uri.Host == "t.me" || uri.Host == "telegram.org" ||
+         uri.Host.EndsWith(".telegram.org", StringComparison.Ordinal) ||
+         uri.Host.EndsWith(".telesco.pe", StringComparison.Ordinal));
 }
