@@ -1,5 +1,6 @@
 using Everything_Lost_Backend;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,13 @@ if (File.Exists(firebaseCredentials))
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<SessionService>();
 builder.Services.AddSingleton<ChatHub>();
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpClient<AvatarImageProxy>()
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+    {
+        AllowAutoRedirect = false,
+        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli
+    });
 
 if (!string.IsNullOrWhiteSpace(builder.Configuration["Telegram:BotToken"]))
 {
@@ -285,9 +293,19 @@ app.MapGet("/api/users/data/{userId}", async (string userId,
     return Results.Ok(await firestore.GetUserDataAsync(userId, ct));
 });
 
+app.MapGet("/api/avatars", async (string url, AvatarImageProxy avatarProxy,
+    HttpContext context, CancellationToken ct) =>
+{
+    var png = await avatarProxy.GetPngAsync(url, ct);
+    if (png == null) return Results.NotFound();
+    context.Response.Headers.CacheControl = "public, max-age=86400";
+    return Results.File(png, "image/png");
+});
+
 app.MapGet("/api/leaderboard/{userId}", async (string userId,
     [FromHeader(Name = "X-Session-Id")] string? sessionId,
-    IServiceProvider services, SessionService sessions, IConfiguration configuration, CancellationToken ct) =>
+    IServiceProvider services, SessionService sessions, IConfiguration configuration,
+    HttpContext context, CancellationToken ct) =>
 {
     if (RequireTreeGrowthSession(userId, sessionId, services, sessions, out var firestore) is { } error)
         return error;
@@ -295,6 +313,8 @@ app.MapGet("/api/leaderboard/{userId}", async (string userId,
     const int limit = 100;
     var excluded = configuration.GetSection("Leaderboard:ExcludedUserIds").Get<string[]>() ?? [];
     var leaders = await firestore.GetLeaderboardAsync(limit, excluded, ct);
+    var isLocal = context.Request.Host.Host is "localhost" or "127.0.0.1";
+    var origin = $"{(isLocal ? context.Request.Scheme : "https")}://{context.Request.Host}";
     return Results.Ok(new
     {
         users = leaders.Select(entry => new
@@ -302,7 +322,8 @@ app.MapGet("/api/leaderboard/{userId}", async (string userId,
             userId = entry.UserId,
             userName = !string.IsNullOrWhiteSpace(entry.Username) ? entry.Username
                 : !string.IsNullOrWhiteSpace(entry.DisplayName) ? entry.DisplayName : "Гравець",
-            avatarUrl = entry.AvatarUrl ?? string.Empty,
+            avatarUrl = string.IsNullOrWhiteSpace(entry.AvatarUrl) ? string.Empty
+                : $"{origin}/api/avatars?url={Uri.EscapeDataString(entry.AvatarUrl)}",
             coinsAmount = (int)Math.Clamp(entry.GlobalCoins, 0, int.MaxValue)
         })
     });
