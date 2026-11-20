@@ -1744,7 +1744,6 @@ C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-B
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.runtimeconfig.json
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.dll
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.pdb
-D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-un9zik5m3e-un9zik5m3e.gz
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\appsettings.Development.json
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\appsettings.json
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\build-check\avatar-proxy-final\appsettings.Development.json
@@ -2516,3 +2515,4 @@ D:\Work\Projects\before-the-winter-backend\_fortune_build_check\Before-The-Winte
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\Before-The-Winter-Backend.runtimeconfig.json
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\Before-The-Winter-Backend.dll
 D:\Work\Projects\before-the-winter-backend\_fortune_build_check\Before-The-Winter-Backend.pdb
+D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-u7dwlg2ggl-u7dwlg2ggl.gz
