@@ -4,7 +4,8 @@ namespace Everything_Lost_Backend;
 
 internal sealed record ChatMessage(string UserId, string Message, long SentAtUnixSeconds);
 
-internal sealed record LeaderboardEntry(string? Username, long GlobalCoins);
+internal sealed record LeaderboardEntry(string UserId, string? Username, string? DisplayName,
+    string? AvatarUrl, long GlobalCoins);
 
 internal sealed partial class FirestoreService
 {
@@ -43,9 +44,11 @@ internal sealed partial class FirestoreService
     public async Task<string?> GetTelegramUsernameAsync(string userId, CancellationToken cancellationToken)
     {
         var snapshot = await db.Collection("Users").Document(userId).GetSnapshotAsync(cancellationToken);
-        return snapshot.Exists && snapshot.ContainsField("telegramUsername")
-            ? snapshot.GetValue<string>("telegramUsername")
-            : null;
+        if (!snapshot.Exists) return null;
+        var username = snapshot.ContainsField("telegramUsername")
+            ? snapshot.GetValue<string>("telegramUsername") : null;
+        if (!string.IsNullOrWhiteSpace(username)) return username;
+        return snapshot.ContainsField("displayName") ? snapshot.GetValue<string>("displayName") : null;
     }
 
     /// <returns>The users with the most globalCoins collected, best first. Users without globalCoins are not ranked.</returns>
@@ -59,7 +62,10 @@ internal sealed partial class FirestoreService
             .Where(d => !excludedUserIds.Contains(d.Id))
             .Take(limit)
             .Select(d => new LeaderboardEntry(
+                d.Id,
                 d.ContainsField("telegramUsername") ? d.GetValue<string>("telegramUsername") : null,
+                d.ContainsField("displayName") ? d.GetValue<string>("displayName") : null,
+                d.ContainsField("avatarUrl") ? d.GetValue<string>("avatarUrl") : null,
                 d.GetValue<long>("globalCoins")))
             .ToList();
     }

@@ -44,16 +44,16 @@ internal sealed partial class FirestoreService(FirestoreDb db)
         await document.DeleteAsync(cancellationToken: cancellationToken);
     }
 
-    public async Task UpdateLastLoginAsync(string userId, string? telegramUsername, CancellationToken cancellationToken)
+    public async Task UpdateLastLoginAsync(string userId, string? telegramUsername,
+        string? displayName, string? avatarUrl, CancellationToken cancellationToken)
     {
         var data = new Dictionary<string, object>
         {
-            ["lastLoginAt"] = FieldValue.ServerTimestamp
+            ["lastLoginAt"] = FieldValue.ServerTimestamp,
+            ["telegramUsername"] = telegramUsername?.Trim() ?? string.Empty,
+            ["displayName"] = displayName?.Trim() ?? string.Empty,
+            ["avatarUrl"] = avatarUrl ?? string.Empty
         };
-        if (!string.IsNullOrWhiteSpace(telegramUsername))
-        {
-            data["telegramUsername"] = telegramUsername;
-        }
 
         await db.Collection("Users").Document(userId).SetAsync(data, SetOptions.MergeAll, cancellationToken);
     }

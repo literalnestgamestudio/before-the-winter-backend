@@ -96,6 +96,7 @@ app.MapPost("/api/users/login", async (
         return Results.BadRequest(new { error = "initData is required." });
 
     string userId;
+    TelegramUserProfile? telegramProfile = null;
     if (isEditorTestLogin)
     {
         userId = "-1";
@@ -108,12 +109,12 @@ app.MapPost("/api/users/login", async (
 
         if (!TelegramInitData.TryValidate(
                 request.InitData, botToken, TimeSpan.FromHours(24), TimeProvider.System.GetUtcNow(),
-                out var telegramUserId, out var initDataError))
+                out telegramProfile, out var initDataError))
         {
             return Results.Json(new { error = initDataError }, statusCode: StatusCodes.Status401Unauthorized);
         }
 
-        userId = telegramUserId.ToString();
+        userId = telegramProfile!.Id.ToString();
         if (request.UserId!.Trim() != userId)
             return Results.Json(new { error = "userId does not match initData." }, statusCode: StatusCodes.Status403Forbidden);
     }
@@ -133,7 +134,13 @@ app.MapPost("/api/users/login", async (
         return activeElsewhere;
     }
 
-    await firestore.UpdateLastLoginAsync(userId, request.Username, ct);
+    var username = isEditorTestLogin ? request.Username : telegramProfile?.Username;
+    var displayName = isEditorTestLogin ? request.DisplayName : telegramProfile?.DisplayName;
+    var photoUrl = isEditorTestLogin ? request.AvatarUrl : telegramProfile?.PhotoUrl;
+    var avatarUrl = photoUrl?.Length <= 2048 && Uri.TryCreate(photoUrl, UriKind.Absolute, out var avatarUri)
+                    && avatarUri.Scheme == Uri.UriSchemeHttps
+        ? avatarUri.ToString() : string.Empty;
+    await firestore.UpdateLastLoginAsync(userId, username, displayName, avatarUrl, ct);
 
     var sessionId = sessions.TryStart(userId, deviceId);
     return sessionId is null
@@ -267,7 +274,10 @@ app.MapGet("/api/leaderboard/{userId}", async (string userId,
     {
         users = leaders.Select(entry => new
         {
-            userName = string.IsNullOrWhiteSpace(entry.Username) ? "Гравець" : entry.Username,
+            userId = entry.UserId,
+            userName = !string.IsNullOrWhiteSpace(entry.Username) ? entry.Username
+                : !string.IsNullOrWhiteSpace(entry.DisplayName) ? entry.DisplayName : "Гравець",
+            avatarUrl = entry.AvatarUrl ?? string.Empty,
             coinsAmount = (int)Math.Clamp(entry.GlobalCoins, 0, int.MaxValue)
         })
     });
@@ -484,7 +494,8 @@ static IResult? RequireTreeGrowthSession(string? userId, string? sessionId, ISer
     return null;
 }
 
-record LoginRequest(string? UserId, string? Username, string? InitData, string? DeviceId, string? DeviceInfo);
+record LoginRequest(string? UserId, string? Username, string? DisplayName, string? AvatarUrl,
+    string? InitData, string? DeviceId, string? DeviceInfo);
 
 record HeartbeatRequest(string? SessionId);
 

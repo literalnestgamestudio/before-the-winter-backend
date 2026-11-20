@@ -134,7 +134,9 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
                     : "🏆 Топ гравців за зібраними монетами:\n\n" + string.Join("\n", top.Select((entry, i) =>
                     {
                         var place = i < medals.Length ? medals[i] : $"{i + 1}.";
-                        var name = string.IsNullOrWhiteSpace(entry.Username) ? "Гравець" : "@" + entry.Username.TrimStart('@');
+                        var name = !string.IsNullOrWhiteSpace(entry.Username)
+                            ? "@" + entry.Username.TrimStart('@')
+                            : !string.IsNullOrWhiteSpace(entry.DisplayName) ? entry.DisplayName : "Гравець";
                         return $"{place} {name} — {entry.GlobalCoins} 🪙";
                     }));
             }

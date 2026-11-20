@@ -5,6 +5,8 @@ using System.Web;
 
 namespace Everything_Lost_Backend;
 
+internal sealed record TelegramUserProfile(long Id, string? Username, string DisplayName, string? PhotoUrl);
+
 /// <summary>
 /// Validates the signed <c>initData</c> string a Telegram Mini App receives, as described in
 /// https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app.
@@ -12,9 +14,10 @@ namespace Everything_Lost_Backend;
 internal static class TelegramInitData
 {
     public static bool TryValidate(
-        string initData, string botToken, TimeSpan maxAge, DateTimeOffset now, out long userId, out string error)
+        string initData, string botToken, TimeSpan maxAge, DateTimeOffset now,
+        out TelegramUserProfile? profile, out string error)
     {
-        userId = 0;
+        profile = null;
 
         var fields = HttpUtility.ParseQueryString(initData);
         var hash = fields["hash"];
@@ -64,7 +67,12 @@ internal static class TelegramInitData
         try
         {
             using var user = JsonDocument.Parse(fields["user"] ?? "");
-            userId = user.RootElement.GetProperty("id").GetInt64();
+            var userFields = user.RootElement;
+            var id = userFields.GetProperty("id").GetInt64();
+            var firstName = ReadString(userFields, "first_name");
+            var lastName = ReadString(userFields, "last_name");
+            profile = new TelegramUserProfile(id, ReadString(userFields, "username"),
+                $"{firstName} {lastName}".Trim(), ReadString(userFields, "photo_url"));
         }
         catch (Exception ex) when (ex is JsonException or InvalidOperationException or KeyNotFoundException)
         {
@@ -75,4 +83,8 @@ internal static class TelegramInitData
         error = "";
         return true;
     }
+
+    private static string? ReadString(JsonElement value, string name)
+        => value.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.String
+            ? property.GetString() : null;
 }
