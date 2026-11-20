@@ -467,6 +467,30 @@ app.MapPost("/api/decorations/add", async (AddDecorationRequest request,
     return Results.Ok(new { userId = request.UserId, decorationId = request.DecorationId, count });
 });
 
+app.MapGet("/api/decorations/placed/{userId}", async (string userId,
+    [FromHeader(Name = "X-Session-Id")] string? sessionId,
+    IServiceProvider services, SessionService sessions, CancellationToken ct) =>
+{
+    if (RequireTreeGrowthSession(userId, sessionId, services, sessions, out var firestore) is { } error)
+        return error;
+    return Results.Ok(new { items = await firestore.GetPlacedDecorationsAsync(userId, ct) });
+});
+
+app.MapPost("/api/decorations/placed", async (PlacedDecorationsRequest request,
+    [FromHeader(Name = "X-Session-Id")] string? sessionId,
+    IServiceProvider services, SessionService sessions, CancellationToken ct) =>
+{
+    if (RequireTreeGrowthSession(request.UserId, sessionId, services, sessions, out var firestore) is { } error)
+        return error;
+    if (request.Items is null || request.Items.Count > 500 || request.Items.Any(item =>
+            item.DecorationId < 0 || !double.IsFinite(item.X) || !double.IsFinite(item.Y) ||
+            item.X < 0 || item.X > 1 || item.Y < 0 || item.Y > 1))
+        return Results.BadRequest(new { error = "Invalid placed decorations." });
+    if (!await firestore.SavePlacedDecorationsAsync(request.UserId!, request.Items, ct))
+        return Results.BadRequest(new { error = "Placed decoration count exceeds inventory." });
+    return Results.Ok(new { saved = request.Items.Count });
+});
+
 app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(30) });
 
 var chat = app.MapGroup("/api/chat");
@@ -565,6 +589,8 @@ record ChangeCoinsRequest(string? UserId, long Amount);
 record FortuneSpinRequest(string? UserId);
 
 record AddDecorationRequest(string? UserId, int DecorationId);
+record PlacedDecoration(int DecorationId, double X, double Y);
+record PlacedDecorationsRequest(string? UserId, List<PlacedDecoration>? Items);
 
 record ChatMessageRequest(string? UserId, string? Message);
 
