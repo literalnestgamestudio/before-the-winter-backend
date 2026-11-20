@@ -77,6 +77,11 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
                             await SendAdminKeyboardAsync(chat.Id, stoppingToken);
                         }
                     }
+                    else if (update.Message is { Text: { } playText, Chat: var playChat }
+                             && (playText == "/play" || playText.StartsWith("/play@", StringComparison.Ordinal)))
+                    {
+                        await SendPlayButtonAsync(playChat.Id, stoppingToken);
+                    }
                     else if (update.Message is { Text: { } text, Chat: var leaderboardChat }
                              && (text == "/leaderboard" || text.StartsWith("/leaderboard@", StringComparison.Ordinal)))
                     {
@@ -223,7 +228,7 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
     /// </summary>
     private async Task SetMenuButtonAsync(CancellationToken cancellationToken)
     {
-        var miniAppUrl = configuration["Telegram:MiniAppUrl"];
+        var miniAppUrl = GetFreshMiniAppUrl();
         if (string.IsNullOrWhiteSpace(miniAppUrl))
         {
             return;
@@ -518,7 +523,7 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
     /// <returns>True when delivered or permanently undeliverable (blocked bot), false when worth retrying.</returns>
     private async Task<bool> TrySendNotificationAsync(long chatId, string text, CancellationToken cancellationToken)
     {
-        var miniAppUrl = configuration["Telegram:MiniAppUrl"];
+        var miniAppUrl = GetFreshMiniAppUrl();
         object payload = string.IsNullOrWhiteSpace(miniAppUrl)
             ? new { chat_id = chatId, text }
             : new
@@ -570,6 +575,47 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
         using var response = await _httpClient.PostAsJsonAsync(
             "sendMessage", new { chat_id = chatId, text }, cancellationToken);
         response.EnsureSuccessStatusCode();
+    }
+
+    private async Task SendPlayButtonAsync(long chatId, CancellationToken cancellationToken)
+    {
+        var miniAppUrl = GetFreshMiniAppUrl();
+        if (string.IsNullOrWhiteSpace(miniAppUrl))
+        {
+            await SendTextAsync(chatId, "Гра зараз недоступна.", cancellationToken);
+            return;
+        }
+
+        using var response = await _httpClient.PostAsJsonAsync(
+            "sendMessage",
+            new
+            {
+                chat_id = chatId,
+                text = "Відкрити гру",
+                reply_markup = new
+                {
+                    inline_keyboard = new[]
+                    {
+                        new[] { new { text = "▶️ Грати", web_app = new { url = miniAppUrl } } }
+                    }
+                }
+            },
+            cancellationToken);
+        response.EnsureSuccessStatusCode();
+    }
+
+    private string? GetFreshMiniAppUrl()
+    {
+        var configuredUrl = configuration["Telegram:MiniAppUrl"];
+        if (string.IsNullOrWhiteSpace(configuredUrl)) return null;
+
+        var url = new UriBuilder(configuredUrl);
+        var query = url.Query.TrimStart('?');
+        var launchVersion = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        url.Query = string.IsNullOrEmpty(query)
+            ? $"launch={launchVersion}"
+            : $"{query}&launch={launchVersion}";
+        return url.Uri.ToString();
     }
 
     public override void Dispose()
