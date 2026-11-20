@@ -55,6 +55,14 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.7, )"
+            },
+            "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+              "target": "Package",
+              "version": "[4.148.0, )"
+            },
+            "Svg.Skia": {
+              "target": "Package",
+              "version": "[5.2.3, )"
             }
           },
           "imports": [
