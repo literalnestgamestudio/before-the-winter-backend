@@ -253,6 +253,26 @@ app.MapGet("/api/users/data/{userId}", async (string userId,
     return Results.Ok(await firestore.GetUserDataAsync(userId, ct));
 });
 
+app.MapGet("/api/leaderboard/{userId}", async (string userId,
+    [FromHeader(Name = "X-Session-Id")] string? sessionId,
+    IServiceProvider services, SessionService sessions, IConfiguration configuration, CancellationToken ct) =>
+{
+    if (RequireTreeGrowthSession(userId, sessionId, services, sessions, out var firestore) is { } error)
+        return error;
+
+    const int limit = 100;
+    var excluded = configuration.GetSection("Leaderboard:ExcludedUserIds").Get<string[]>() ?? [];
+    var leaders = await firestore.GetLeaderboardAsync(limit, excluded, ct);
+    return Results.Ok(new
+    {
+        users = leaders.Select(entry => new
+        {
+            userName = string.IsNullOrWhiteSpace(entry.Username) ? "Гравець" : entry.Username,
+            coinsAmount = (int)Math.Clamp(entry.GlobalCoins, 0, int.MaxValue)
+        })
+    });
+});
+
 app.MapPost("/api/box/set-opened", async (GrowthActionRequest request,
     [FromHeader(Name = "X-Session-Id")] string? sessionId,
     IServiceProvider services, SessionService sessions, TimeProvider time, CancellationToken ct) =>
