@@ -4,6 +4,27 @@ namespace Everything_Lost_Backend;
 
 internal sealed partial class FirestoreService
 {
+    private const int FortuneSpinPrice = 100;
+    private static readonly int[] FortuneRewards = [10, 25, 40, 50, 75, 100, 150, 300];
+
+    public async Task<(long Balance, int RewardIndex, int Reward)?> SpinFortuneAsync(
+        string userId, CancellationToken cancellationToken)
+    {
+        var rewardIndex = System.Security.Cryptography.RandomNumberGenerator.GetInt32(FortuneRewards.Length);
+        var reward = FortuneRewards[rewardIndex];
+        var doc = db.Collection("Users").Document(userId);
+        return await db.RunTransactionAsync<(long Balance, int RewardIndex, int Reward)?>(async transaction =>
+        {
+            var snapshot = await transaction.GetSnapshotAsync(doc, cancellationToken);
+            var balance = snapshot.Exists && snapshot.ContainsField("coins")
+                ? snapshot.GetValue<long>("coins") : 0;
+            if (balance < FortuneSpinPrice) return null;
+            var updated = checked(balance - FortuneSpinPrice + reward);
+            transaction.Set(doc, new Dictionary<string, object> { ["coins"] = updated }, SetOptions.MergeAll);
+            return (updated, rewardIndex, reward);
+        }, cancellationToken: cancellationToken);
+    }
+
     /// <summary>Atomically increments the owned quantity, including legacy documents without a count.</summary>
     public Task<long> AddDecorationAsync(string userId, int decorationId, CancellationToken cancellationToken)
     {

@@ -284,6 +284,20 @@ app.MapPost("/api/coins/change", async (ChangeCoinsRequest request,
         : Results.Ok(new { userId = request.UserId, coinsAmount });
 });
 
+app.MapPost("/api/fortune/spin", async (FortuneSpinRequest request,
+    [FromHeader(Name = "X-Session-Id")] string? sessionId,
+    IServiceProvider services, SessionService sessions, CancellationToken ct) =>
+{
+    if (RequireTreeGrowthSession(request.UserId, sessionId, services, sessions, out var firestore) is { } error)
+        return error;
+
+    var result = await firestore.SpinFortuneAsync(request.UserId!, ct);
+    return result is null
+        ? Results.BadRequest(new { error = "Not enough coins." })
+        : Results.Ok(new { coinsAmount = result.Value.Balance,
+            rewardIndex = result.Value.RewardIndex, reward = result.Value.Reward });
+});
+
 app.MapGet("/api/users/data/{userId}", async (string userId,
     [FromHeader(Name = "X-Session-Id")] string? sessionId,
     IServiceProvider services, SessionService sessions, CancellationToken ct) =>
@@ -548,6 +562,7 @@ record HeartbeatRequest(string? SessionId);
 record GrowthActionRequest(string? UserId);
 
 record ChangeCoinsRequest(string? UserId, long Amount);
+record FortuneSpinRequest(string? UserId);
 
 record AddDecorationRequest(string? UserId, int DecorationId);
 
