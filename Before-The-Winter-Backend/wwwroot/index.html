@@ -92,7 +92,6 @@
       };
 
       var script = document.createElement("script");
-      script.src = loaderUrl;
       script.onload = () => {
         const loadingContainer = document.querySelector("#unity-loading-container");
         const progressBarFull = document.querySelector("#unity-progress-bar-full");
@@ -116,7 +115,20 @@
           alert(message);
         });
       };
-      document.body.appendChild(script);
+      fetch("/api/build-version", { cache: "no-store" })
+        .then(response => {
+          if (!response.ok) throw new Error("Build version unavailable");
+          return response.json();
+        })
+        .then(result => result.version)
+        .catch(() => String(Date.now()))
+        .then(version => {
+          var suffix = "?v=" + encodeURIComponent(version);
+          ["dataUrl", "frameworkUrl", "codeUrl", "workerUrl", "memoryUrl", "symbolsUrl"]
+            .forEach(key => { if (config[key]) config[key] += suffix; });
+          script.src = loaderUrl + suffix;
+          document.body.appendChild(script);
+        });
     </script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 using Everything_Lost_Backend;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,25 @@ if (!string.IsNullOrWhiteSpace(builder.Configuration["Telegram:BotToken"]))
 
 var app = builder.Build();
 
+var buildDirectory = Path.Combine(app.Environment.WebRootPath ??
+    Path.Combine(app.Environment.ContentRootPath, "wwwroot"), "Build");
+var buildVersion = string.Join("-", new[]
+{
+    "wwwroot.loader.js", "wwwroot.framework.js.br", "wwwroot.wasm.br", "wwwroot.data.br"
+}.Select(name =>
+{
+    var file = Path.Combine(buildDirectory, name);
+    if (!File.Exists(file)) return "missing";
+    using var stream = File.OpenRead(file);
+    return Convert.ToHexString(SHA256.HashData(stream))[..8];
+}));
+
+app.MapGet("/api/build-version", (HttpContext context) =>
+{
+    context.Response.Headers.CacheControl = "no-store";
+    return Results.Ok(new { version = buildVersion });
+});
+
 if (string.IsNullOrWhiteSpace(builder.Configuration["Telegram:BotToken"]))
 {
     app.Logger.LogWarning("Telegram bot is disabled: Telegram:BotToken is not configured.");
@@ -51,6 +71,11 @@ app.UseStaticFiles(new StaticFileOptions
     OnPrepareResponse = context =>
     {
         var path = context.File.Name;
+        if (path.Equals("index.html", StringComparison.OrdinalIgnoreCase) ||
+            context.Context.Request.Path.StartsWithSegments("/Build"))
+        {
+            context.Context.Response.Headers.CacheControl = "no-cache, must-revalidate";
+        }
         if (path.EndsWith(".br", StringComparison.OrdinalIgnoreCase))
         {
             context.Context.Response.Headers.ContentEncoding = "br";
