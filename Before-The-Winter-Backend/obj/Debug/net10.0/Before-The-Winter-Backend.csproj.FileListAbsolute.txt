@@ -973,7 +973,6 @@ D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\bin\Debug\n
 D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\bin\Debug\net10.0\runtimes\win-x86\native\libSkiaSharp.dll
 D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\bin\Debug\net10.0\runtimes\win-x86\native\libSkiaSharp.pdb
 D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\dl09zufvu1-{0}-lpjo7arxfw-lpjo7arxfw.gz
-D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-ir5t5tq1w5-ir5t5tq1w5.gz
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\appsettings.Development.json
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\appsettings.json
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\build-check\avatar-proxy-final\appsettings.Development.json
@@ -1745,3 +1744,4 @@ C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-B
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.runtimeconfig.json
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.dll
 C:\Users\artab\AppData\Local\Temp\before-winter-avatar-build\Before-The-Winter-Backend.pdb
+D:\Work\Projects\before-the-winter-backend\Before-The-Winter-Backend\obj\Debug\net10.0\compressed\rfrqbeji2j-{0}-un9zik5m3e-un9zik5m3e.gz
