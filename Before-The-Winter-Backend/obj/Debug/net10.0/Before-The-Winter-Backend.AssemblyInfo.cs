@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Before-The-Winter-Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd0420512901c3c3141874719036ea3acc6e54ec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7efba46eb6a23ab85a67a9165ad88b1eb70949d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Before-The-Winter-Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Before-The-Winter-Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
