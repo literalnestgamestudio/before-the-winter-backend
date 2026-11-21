@@ -132,16 +132,16 @@ curl -X POST http://localhost:5122/api/coins/change -H "Content-Type: applicatio
 
 ### POST `/api/decorations/add`
 
-Додає прикрасу користувачу: `Users/{userId}/Decorations/{decorationId}`. Повторне додавання тієї самої прикраси нічого не змінює. `decorationId` не може бути від'ємним (`400`). Потрібен `X-Session-Id`.
+Додає прикрасу користувачу: `Users/{userId}/Decorations/{decorationId}`. Повторне додавання збільшує `count`. `decorationId` не може бути від'ємним (`400`). Потрібен `X-Session-Id`. `rarityValue`: `0` — Normal, `1` — Rare, `2` — Epic. Для Epic обов'язкове `decorationName` (до 100 символів): бот повідомить усіх гравців про знахідку. Для старих клієнтів відсутнє `rarityValue` вважається Normal.
 
 ```bash
-curl -X POST http://localhost:5122/api/decorations/add -H "Content-Type: application/json" -H "X-Session-Id: <sessionId>" -d '{"userId":"123456789","decorationId":7}'
+curl -X POST http://localhost:5122/api/decorations/add -H "Content-Type: application/json" -H "X-Session-Id: <sessionId>" -d '{"userId":"123456789","decorationId":7,"rarityValue":2,"decorationName":"Блекі"}'
 ```
 
 Відповідь `200`:
 
 ```json
-{"userId":"123456789","decorationId":7}
+{"userId":"123456789","decorationId":7,"count":1}
 ```
 
 ## 5. Усі дані користувача

@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Channels;
 
 namespace Everything_Lost_Backend;
 
@@ -33,6 +34,14 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
     private bool _awaitingPost;
     private long? _draftMessageId;
     private bool _broadcastRunning;
+    private readonly Channel<(string UserId, string DecorationName)> _epicAnnouncements =
+        Channel.CreateUnbounded<(string, string)>(new UnboundedChannelOptions { SingleReader = true });
+
+    public void QueueEpicAnnouncement(string userId, string decorationName)
+    {
+        if (long.TryParse(userId, out var id) && id > 0 && firestore is not null)
+            _epicAnnouncements.Writer.TryWrite((userId, decorationName));
+    }
 
     private readonly HttpClient _httpClient = new()
     {
@@ -49,6 +58,7 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
         if (firestore is not null)
         {
             _ = RunNotificationsAsync(stoppingToken);
+            _ = RunEpicAnnouncementsAsync(stoppingToken);
         }
 
         while (!stoppingToken.IsCancellationRequested)
@@ -388,6 +398,42 @@ internal sealed class TelegramBotService(IConfiguration configuration, ILogger<T
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
             logger.LogWarning(ex, "Broadcast callback handling failed");
+        }
+    }
+
+    private async Task RunEpicAnnouncementsAsync(CancellationToken cancellationToken)
+    {
+        await foreach (var (userId, decorationName) in _epicAnnouncements.Reader.ReadAllAsync(cancellationToken))
+        {
+            try
+            {
+                var nickname = await firestore!.GetTelegramUsernameAsync(userId, cancellationToken);
+                nickname = string.IsNullOrWhiteSpace(nickname) ? $"Гравець {userId}" : nickname.Trim();
+                nickname = nickname.Replace('\r', ' ').Replace('\n', ' ');
+                var safeDecorationName = decorationName.Replace('\r', ' ').Replace('\n', ' ');
+                var text = $"🌟 ЕПІЧНА ЗНАХІДКА! 🌟\n\n" +
+                           $"🎉 {nickname} щойно отримав «{safeDecorationName}»!\n\n" +
+                           "✨ Нехай ця рідкісна прикраса сяє на ялинці!";
+
+                var userIds = await firestore.GetTelegramUserIdsAsync(cancellationToken);
+                foreach (var recipientId in userIds)
+                {
+                    try
+                    {
+                        await TrySendNotificationAsync(recipientId, text, cancellationToken);
+                    }
+                    catch (Exception ex) when (ex is not OperationCanceledException)
+                    {
+                        logger.LogWarning(ex, "Epic announcement to {ChatId} failed", recipientId);
+                    }
+
+                    await Task.Delay(TimeSpan.FromMilliseconds(50), cancellationToken);
+                }
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                logger.LogWarning(ex, "Epic announcement for {UserId} failed", userId);
+            }
         }
     }
 

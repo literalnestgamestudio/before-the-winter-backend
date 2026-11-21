@@ -31,7 +31,8 @@ builder.Services.AddHttpClient<AvatarImageProxy>()
 
 if (!string.IsNullOrWhiteSpace(builder.Configuration["Telegram:BotToken"]))
 {
-    builder.Services.AddHostedService<TelegramBotService>();
+    builder.Services.AddSingleton<TelegramBotService>();
+    builder.Services.AddHostedService(sp => sp.GetRequiredService<TelegramBotService>());
 }
 
 var app = builder.Build();
@@ -462,8 +463,15 @@ app.MapPost("/api/decorations/add", async (AddDecorationRequest request,
         return error;
     if (request.DecorationId < 0)
         return Results.BadRequest(new { error = "decorationId must not be negative." });
+    if (request.RarityValue is < 0 or > 2)
+        return Results.BadRequest(new { error = "rarityValue must be 0 (Normal), 1 (Rare), or 2 (Epic)." });
+    if (request.RarityValue == 2 &&
+        (string.IsNullOrWhiteSpace(request.DecorationName) || request.DecorationName.Length > 100))
+        return Results.BadRequest(new { error = "Epic decorations require a name of at most 100 characters." });
 
     var count = await firestore.AddDecorationAsync(request.UserId!, request.DecorationId, ct);
+    if (request.RarityValue == 2)
+        services.GetService<TelegramBotService>()?.QueueEpicAnnouncement(request.UserId!, request.DecorationName!.Trim());
     return Results.Ok(new { userId = request.UserId, decorationId = request.DecorationId, count });
 });
 
@@ -588,7 +596,7 @@ record GrowthActionRequest(string? UserId);
 record ChangeCoinsRequest(string? UserId, long Amount);
 record FortuneSpinRequest(string? UserId);
 
-record AddDecorationRequest(string? UserId, int DecorationId);
+record AddDecorationRequest(string? UserId, int DecorationId, int? RarityValue, string? DecorationName);
 record PlacedDecoration(int DecorationId, double X, double Y);
 record PlacedDecorationsRequest(string? UserId, List<PlacedDecoration>? Items);
 
